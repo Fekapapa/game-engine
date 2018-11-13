@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+  background-color: rgb(40, 40, 40);
+}
+
+.drone__map {
+  border: 3px solid black;
+  margin: auto;
+  margin-top: 50px;
+  display: block;
+}

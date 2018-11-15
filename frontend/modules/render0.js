@@ -42,3 +42,5 @@ const draw = (data) => {
   droneImg.src = coordinateCalc(data.droneData).src;
 
 }
+
+export { draw };

@@ -3,6 +3,13 @@
 import { Main } from "../../main.js";
 
 const Render = (data, canvas, ctx, imageToRender) => {
+
+  const mapBgImg = new Image();
+  mapBgImg.onload = function() {
+    ctx.drawImage(mapBgImg, 0, 0);
+  };
+  mapBgImg.src = "./frontend/img/wareHouse_layout.png";
+
   const coordinateCalc = (data) => {
     let object = {};
 

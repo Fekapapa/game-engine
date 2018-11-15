@@ -48,18 +48,26 @@ const unitData = {
 
 let frame = 0;
 let prevActivity = ""
-
+let img = 0;
 const ElvenArcher = (activity, coordinates) => {
 
   const framecounter = () => {
-    if (activity !== prevActivity || frame === 4) {
+    if (activity !== prevActivity || frame === 20) {
       frame = 0;
-    } else if (frame < 4) {
-        frame++;
+      img = 0
+    } else if (frame === 5) {
+        img = 1
+    } else if (frame === 10) {
+        img = 2
+    } else if (frame === 15) {
+        img = 4
+    } else if (frame === 20) {
+        img = 4
     }
+    frame++;
   }
-  
-  const activityFrame = activity + frame;
+  framecounter()
+  const activityFrame = activity + img;
 
   const nextFrame = spriteData[activity][activityFrame];
   nextFrame.dx = coordinates.dx;

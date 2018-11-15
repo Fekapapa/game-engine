@@ -14,7 +14,7 @@ const StoreData = (data) => {
 const coordinates = { "dx": 0, "dy":0 };
 const canvas = document.getElementById('gameCanvas-1');
 const ctx = canvas.getContext('2d');
-ctx.globalCompositeOperation = "copy";
+//ctx.globalCompositeOperation = "copy";
 const imageToRender = new Image();
 
 

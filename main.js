@@ -1,35 +1,43 @@
 'use strict'
 
-import { Render } from "./frontend/modules/render.js";
+import { Render, RenderInit } from "./frontend/modules/render.js";
 import { GetData } from "./frontend/modules/getData.js";
+import { UserEventHandler } from "./frontend/modules/userEventHandler.js";
 import { ElvenArcher } from "./frontend/modules/gameComponents/elvenArcher.js";
+import { Background } from "./frontend/modules/gameComponents/background.js";
 
 let state = {};
 
 const StoreData = (data) => {
-  state = data
+  state = data;
+  UserEventHandler();
+  RenderInit(2);
   Main();
 }
 
-const coordinates = { "dx": 0, "dy":0 };
-const canvas = document.getElementById('gameCanvas-1');
-const ctx = canvas.getContext('2d');
-//ctx.globalCompositeOperation = "copy";
-const imageToRender = new Image();
+const MouseEventCatch = (e) => {
+  state.elvenArcher.goto = {x: e.offsetX, y: 800 - e.offsetY }
+  console.log(state)
+}
 
+const SetState = (state) => {
+  state = state;
+}
+
+const coordinates = { "dx": 600, "dy":400 };
 
 const Main = () => {
-  if (coordinates.dx !== 500) {
-    //window.setTimeout(Main, 16);
-    window.requestAnimationFrame(Main);
+  if (coordinates.dx < 900) {
 
-    coordinates.dx++
-    coordinates.dy++
-    const toRender = ElvenArcher("walk", { "dx": coordinates.dx, "dy":coordinates.dy });
-    Render(toRender, canvas, ctx, imageToRender);
+    const toRender = [];
+    toRender.push(Background());
+    toRender.push(ElvenArcher(state.elvenArcher));
+
+    Render(toRender);
+    window.requestAnimationFrame(Main);
   }
 }
 
 GetData();
 
-export { StoreData, Main };
+export { StoreData, Main, MouseEventCatch, SetState };

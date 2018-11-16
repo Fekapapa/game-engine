@@ -2,13 +2,26 @@
 
 import { Main } from "../../main.js";
 
-const Render = (data, canvas, ctx, imageToRender) => {
+let canvas;
+let ctx;
+const imageInit = [];
 
-  const mapBgImg = new Image();
-  mapBgImg.onload = function() {
-    ctx.drawImage(mapBgImg, 0, 0);
-  };
-  mapBgImg.src = "./frontend/img/wareHouse_layout.png";
+const RenderInit = (length) => {
+  canvas = document.getElementById('gameCanvas-1');
+  ctx = canvas.getContext('2d');
+
+  while (length--) {
+    imageInit.push(new Image());
+  }
+};
+
+const Render = (data) => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  let length = data.length;
+
+  let sortedData = data.sort(function (a, b) {
+    return b.zIndex - a.zIndex;
+  });
 
   const coordinateCalc = (data) => {
     let object = {};
@@ -25,11 +38,11 @@ const Render = (data, canvas, ctx, imageToRender) => {
     return object
   }
 
-  const dataToRender = coordinateCalc(data);
+  while (length--) {
+    const dataToRender = coordinateCalc(sortedData[length]);
 
-  imageToRender.onload = function() {
     ctx.drawImage(
-    imageToRender,
+    imageInit[length],
     dataToRender.sx,
     dataToRender.sy,
     dataToRender.sWidth,
@@ -39,10 +52,9 @@ const Render = (data, canvas, ctx, imageToRender) => {
     dataToRender.dWidth,
     dataToRender.dHeight
     )
-  };
-  //ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  imageToRender.src = dataToRender.src;
+    imageInit[length].src = dataToRender.src;
+  }
 }
 
-export { Render };
+export { Render, RenderInit };

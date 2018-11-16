@@ -1,5 +1,13 @@
 {
-  "width": "250",
-  "height": "50",
-  "imageSource": "./frontend/img/test_sprite_archer.png"
+  "elvenArcher": {
+    "speed": 10,
+    "health": 20,
+    "armor": 1,
+    "damageMin": 1,
+    "damageMax": 3,
+    "range": 250,
+    "attackSpeed": 5,
+    "goto": { "x": 600, "y":400 },
+    "position": { "x": 600, "y":400 }
+  }
 }

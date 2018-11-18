@@ -1,6 +1,7 @@
 'use strict'
 
 import { PositionActivityCalc } from "../positionActivityCalc.js";
+import { SetState } from "../../../../main.js";
 
 const spriteData = {
   "zIndex": 1,
@@ -75,7 +76,6 @@ const spriteData = {
 const unitData = {
     "name": "elvenArcher",
     "activity": "",
-    "isJustSummoned": true,
     "speed": 10,
     "health": 20,
     "armor": 1,
@@ -92,63 +92,70 @@ let prevActivity = ""
 let img = 0;
 let unitId = "";
 let numberOfUnits = 0;
-let runTime = 1;
 
-const ElvenArcher = (state, toRender) => {
-  let unitCounter = 1;
+const CreateElvenArcher = (status, coordinates) => {
+  if (!status[unitData.name]) {
+    status[unitData.name] = {};
+    status[unitData.name].amount = 0;
+  }
 
-  const setUnitId = (state) => {
+  let unitCounter = 0;
+
+  const setUnitId = (status) => {
     unitId = unitData.name + unitCounter;
+    console.log(status[unitId])
 
-    if (state[unitId] === undefined || state[unitId] === {}) {
-      state[unitId] = unitData;
-      state[unitId].unitId = unitId;
-      state[unitId].isJustSummoned = false;
+    if (!status[unitId]) {
+      status[unitId] = unitData;
+      status[unitId].unitId = unitId;
+      status[unitId].position = coordinates;
       numberOfUnits = unitCounter;
-    } else if (unitCounter === numberOfUnits) {
+    } else if (unitCounter <= numberOfUnits) {
       unitCounter++;
-      setUnitId(state);
+      if (unitCounter > status[unitData.name].amount) {
+        status[unitData.name].amount = unitCounter;
+      }
+      setUnitId(status);
     }
   }
-  setUnitId(state);
-
-  let localState = {};
-
-  localState = PositionActivityCalc(state, unitData.name + runTime)[unitData.name + runTime];
-  console.log(unitData.name + runTime)
-  console.log(localState.goto.x)
-  const framecounter = () => {
-    if (localState.activity !== prevActivity || frame === 40) {
-      frame = 0;
-      img = 0
-    } else if (frame === 10) {
-        img = 1
-    } else if (frame === 20) {
-        img = 2
-    } else if (frame === 30) {
-        img = 4
-    } else if (frame === 40) {
-        img = 4
-    }
-    frame++;
-  }
-  framecounter()
-  const activityFrame = localState.activity + img;
-
-  const nextFrame = spriteData[localState.activity][activityFrame];
-  nextFrame.dx = localState.position.x;
-  nextFrame.dy = localState.position.y;
-  nextFrame.src = spriteData[localState.activity].imageSource;
-  nextFrame.zIndex = spriteData.zIndex;
-  prevActivity = localState.activity;
-
-  if(runTime < numberOfUnits) {
-    runTime++;
-  } else {
-    runTime = 1;
-  }
-
-  toRender.push(nextFrame);
+  setUnitId(status);
+  SetState(status);
 }
 
-export { ElvenArcher };
+const ElvenArcher = (state, toRender) => {
+  const unitCounter = state[unitData.name].amount;
+  let localState = {};
+  let i = 0;
+
+  for (i; i <= unitCounter; i++) {
+    localState = PositionActivityCalc(state, unitData.name + i)[unitData.name + i];
+    const framecounter = () => {
+      if (localState.activity !== prevActivity || frame === 40) {
+        frame = 0;
+        img = 0
+      } else if (frame === 10) {
+          img = 1
+      } else if (frame === 20) {
+          img = 2
+      } else if (frame === 30) {
+          img = 4
+      } else if (frame === 40) {
+          img = 4
+      }
+      frame++;
+    }
+    framecounter()
+    const activityFrame = localState.activity + img;
+
+    const nextFrame = spriteData[localState.activity][activityFrame];
+    nextFrame.dx = localState.position.x;
+    nextFrame.dy = localState.position.y;
+    nextFrame.src = spriteData[localState.activity].imageSource;
+    nextFrame.zIndex = spriteData.zIndex;
+    prevActivity = localState.activity;
+
+    toRender.push(nextFrame);
+  }
+}
+
+export { CreateElvenArcher, ElvenArcher };

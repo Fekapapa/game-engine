@@ -40,7 +40,6 @@ const Render = (data) => {
 
   while (length--) {
     const dataToRender = coordinateCalc(sortedData[length]);
-
     ctx.drawImage(
     imageInit[length],
     dataToRender.sx,

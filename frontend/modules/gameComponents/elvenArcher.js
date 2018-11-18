@@ -1,6 +1,6 @@
 'use strict'
 
-import { SetState } from "../../../main.js";
+import { PositionActivityCalc } from "../positionActivityCalc.js";
 
 const spriteData = {
   "zIndex": 1,
@@ -72,42 +72,53 @@ const spriteData = {
   }
 }
 
+const unitData = {
+    "name": "elvenArcher",
+    "activity": "",
+    "isJustSummoned": true,
+    "speed": 10,
+    "health": 20,
+    "armor": 1,
+    "damageMin": 1,
+    "damageMax": 3,
+    "range": 250,
+    "attackSpeed": 5,
+    "goto": { "x": 600, "y":400 },
+    "position": { "x": 600, "y":400 }
+}
+
 let frame = 0;
 let prevActivity = ""
 let img = 0;
+let unitId = "";
+let numberOfUnits = 0;
+let runTime = 1;
 
-const ElvenArcher = (state) => {
-  let activity = "";
+const ElvenArcher = (state, toRender) => {
+  let unitCounter = 1;
 
-  if (!state.goto.x) {
-    state.goto.x = state.position.x;
-    state.goto.y = state.position.y;
-  } else {
-    const deltaX = state.goto.x - state.position.x;
-    const deltaY = state.goto.y - state.position.y;
-    const distance = Math.sqrt(deltaX*deltaX+deltaY*deltaY);
+  const setUnitId = (state) => {
+    unitId = unitData.name + unitCounter;
 
-    let velocityX = 0;
-    let velocityY = 0;
-
-    if (distance !== 0) {
-      velocityX = (deltaX/distance) * state.speed/10;
-      velocityY = (deltaY/distance) * state.speed/10;
-      activity = "walk";
-      state.position.x += velocityX;
-      state.position.y += velocityY;
-    }
-    if (distance < state.speed/10){
-      state.position.x = state.goto.x;
-      state.position.y = state.goto.y;
-      activity = "idle";
+    if (state[unitId] === undefined || state[unitId] === {}) {
+      state[unitId] = unitData;
+      state[unitId].unitId = unitId;
+      state[unitId].isJustSummoned = false;
+      numberOfUnits = unitCounter;
+    } else if (unitCounter === numberOfUnits) {
+      unitCounter++;
+      setUnitId(state);
     }
   }
+  setUnitId(state);
 
-  SetState(state);
+  let localState = {};
 
+  localState = PositionActivityCalc(state, unitData.name + runTime)[unitData.name + runTime];
+  console.log(unitData.name + runTime)
+  console.log(localState.goto.x)
   const framecounter = () => {
-    if (activity !== prevActivity || frame === 40) {
+    if (localState.activity !== prevActivity || frame === 40) {
       frame = 0;
       img = 0
     } else if (frame === 10) {
@@ -122,16 +133,22 @@ const ElvenArcher = (state) => {
     frame++;
   }
   framecounter()
-  const activityFrame = activity + img;
+  const activityFrame = localState.activity + img;
 
-  const nextFrame = spriteData[activity][activityFrame];
-  nextFrame.dx = state.position.x;
-  nextFrame.dy = state.position.y;
-  nextFrame.src = spriteData[activity].imageSource;
+  const nextFrame = spriteData[localState.activity][activityFrame];
+  nextFrame.dx = localState.position.x;
+  nextFrame.dy = localState.position.y;
+  nextFrame.src = spriteData[localState.activity].imageSource;
   nextFrame.zIndex = spriteData.zIndex;
-  prevActivity = activity;
+  prevActivity = localState.activity;
 
-  return nextFrame;
+  if(runTime < numberOfUnits) {
+    runTime++;
+  } else {
+    runTime = 1;
+  }
+
+  toRender.push(nextFrame);
 }
 
 export { ElvenArcher };

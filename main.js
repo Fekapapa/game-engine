@@ -11,31 +11,26 @@ let state = {};
 const StoreData = (data) => {
   state = data;
   UserEventHandler();
-  RenderInit(2);
+  RenderInit(3);
   Main();
 }
 
 const MouseEventCatch = (e) => {
-  state.elvenArcher.goto = {x: e.offsetX, y: 800 - e.offsetY }
-  console.log(state)
+  state.elvenArcher1.goto = {x: e.offsetX, y: 800 - e.offsetY }
 }
 
 const SetState = (state) => {
   state = state;
 }
 
-const coordinates = { "dx": 600, "dy":400 };
-
 const Main = () => {
-  if (coordinates.dx < 900) {
+  const toRender = [];
+  Background(toRender);
+  ElvenArcher(state, toRender);
+  ElvenArcher(state, toRender);
 
-    const toRender = [];
-    toRender.push(Background());
-    toRender.push(ElvenArcher(state.elvenArcher));
-
-    Render(toRender);
-    window.requestAnimationFrame(Main);
-  }
+  Render(toRender);
+  window.requestAnimationFrame(Main);
 }
 
 GetData();

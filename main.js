@@ -11,40 +11,26 @@ let state = {};
 const StoreData = (data) => {
   state = data;
   UserEventHandler();
-  RenderInit(4);
+  RenderInit(2);
+  CreateElvenArcher(state, {x: 600, y: 400 });
   Main();
 }
 
-const MouseEventCatch = (e) => {
-  state.elvenArcher1.goto = {x: e.offsetX, y: 800 - e.offsetY }
+const SetState = (state) => {
+  state = Object.assign(state);
 }
 
-const SetState = (state) => {
-  state = state;
-}
-let counter = 0
+const GetState = () => Object.assign(state);
+
 const Main = () => {
   const toRender = [];
   Background(toRender);
-  CreateElvenArcher(state, {x: 200, y: 600 });
-  CreateElvenArcher(state, {x: 400, y: 600 });
-  CreateElvenArcher(state, {x: 600, y: 600 });
   ElvenArcher(state, toRender);
-
   Render(toRender);
-counter++
-console.log(counter)
-if(counter === 1) {
-  state.elvenArcher1.goto = {x: 1000, y: 600 }
 
-}
-
-  if (counter < 3) {
-    //Main()
-  }
-  //window.requestAnimationFrame(Main);
+  window.requestAnimationFrame(Main);
 }
 
 GetData();
 
-export { StoreData, Main, MouseEventCatch, SetState };
+export { StoreData, Main, SetState, GetState };

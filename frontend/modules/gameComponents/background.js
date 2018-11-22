@@ -2,7 +2,7 @@
 
 const spriteData = {
   "imageSource": "./frontend/img/background.png",
-  "zIndex": 0,
+  "zIndex": -1,
   "idle": {
     "idle0": {
       "sx": 0,
@@ -13,18 +13,10 @@ const spriteData = {
   }
 }
 
-const unitData = {
-  "speed": 4,
-  "health": 20,
-  "armor": 1,
-  "damageMin": 1,
-  "damageMax": 3,
-  "range": 250,
-  "attackSpeed": 5
-}
-
 const Background = (toRender) => {
   const frame = spriteData.idle.idle0;
+  frame.id = "background0";
+  frame.interactRightClick = false;
   frame.dx = 600;
   frame.dy = 400;
   frame.src = spriteData.imageSource;

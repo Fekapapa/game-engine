@@ -75,6 +75,7 @@ const spriteData = {
 
 const unitData = {
     "name": "elvenArcher",
+    "interactRightClick": true,
     "activity": "",
     "speed": 10,
     "health": 20,
@@ -91,7 +92,6 @@ let frame = 0;
 let prevActivity = ""
 let img = 0;
 let unitId = "";
-let numberOfUnits = 0;
 
 const CreateElvenArcher = (status, coordinates) => {
   if (!status[unitData.name]) {
@@ -99,21 +99,17 @@ const CreateElvenArcher = (status, coordinates) => {
     status[unitData.name].amount = 0;
   }
 
-  let unitCounter = 0;
-
   const setUnitId = (status) => {
-    unitId = unitData.name + unitCounter;
-    console.log(status[unitId])
+    unitId = "elvenArcher0";
 
     if (!status[unitId]) {
       status[unitId] = unitData;
       status[unitId].unitId = unitId;
       status[unitId].position = coordinates;
-      numberOfUnits = unitCounter;
     } else if (unitCounter <= numberOfUnits) {
       unitCounter++;
       if (unitCounter > status[unitData.name].amount) {
-        status[unitData.name].amount = unitCounter;
+        status[unitId] = unitCounter;
       }
       setUnitId(status);
     }
@@ -128,7 +124,7 @@ const ElvenArcher = (state, toRender) => {
   let i = 0;
 
   for (i; i <= unitCounter; i++) {
-    localState = PositionActivityCalc(state, unitData.name + i)[unitData.name + i];
+    localState = PositionActivityCalc(state, "elvenArcher0")["elvenArcher0"];
     const framecounter = () => {
       if (localState.activity !== prevActivity || frame === 40) {
         frame = 0;
@@ -148,6 +144,8 @@ const ElvenArcher = (state, toRender) => {
     const activityFrame = localState.activity + img;
 
     const nextFrame = spriteData[localState.activity][activityFrame];
+    nextFrame.id = localState.unitId;
+    nextFrame.interactRightClick = localState.interactRightClick;
     nextFrame.dx = localState.position.x;
     nextFrame.dy = localState.position.y;
     nextFrame.src = spriteData[localState.activity].imageSource;

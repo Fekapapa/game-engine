@@ -1,10 +1,65 @@
 'use strict'
 
-import { MouseEventCatch } from "../../main.js";
+import { SetState, GetState } from "../../main.js";
 
 const UserEventHandler = () => {
   const canvas = document.getElementById('gameCanvas-1');
   canvas.addEventListener("click", MouseEventCatch, false);
+  canvas.addEventListener("contextmenu", MouseEventCatch, false);
+}
+
+const MouseEventCatch = (e) => {
+  const clickX = e.offsetX;
+  const clickY = 800 - e.offsetY;
+  let clickButton;
+  const clickedElements = [];
+  const state = GetState();
+
+  switch(e.button) {
+      case 1:
+      clickButton = 1;
+      break;
+
+      case 2:
+      clickButton = 2;
+      break;
+
+      default:
+      clickButton = 0;
+      break;
+  }
+
+  if (clickButton === 0) {
+    const detectElement = (id, element) => {
+        if (clickX <= (element.dx + element.sWidth / 2) && clickX >= (element.dx - element.sWidth / 2)) {
+          if (clickY <= (element.dy + element.sHeight / 2) && clickY >= (element.dy - element.sHeight / 2)) {
+            if (element.interactRightClick) {
+              clickedElements.push(element);
+            } else {
+              clickedElements.push({ id: "unSelected", zIndex: -1 });
+            }
+          }
+        }
+      }
+
+    Object.entries(state.com).forEach(
+        ([key, value]) => detectElement(key, value)
+    );
+
+    const sortedClickedElements = clickedElements.sort(function (a, b) {
+      return b.zIndex - a.zIndex;
+    });
+    state.selected = sortedClickedElements[0];
+  }
+
+  if (clickButton === 2 && state.selected.id !== "unSelected" ) {
+    state[state.selected.id].goto = {x: clickX, y: clickY };
+  }
+
+  SetState(state);
+  e.preventDefault();
+  e.stopPropagation();
+  return false;
 }
 
 export { UserEventHandler };

@@ -1,3 +1,4 @@
 {
-  "selected": false
+  "selected": { "id": "unSelected", "zIndex": -1 },
+  "com": {}
 }

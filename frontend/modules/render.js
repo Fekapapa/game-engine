@@ -32,7 +32,7 @@ const Render = (data) => {
     object.sWidth = data.sWidth;
     object.sHeight = data.sHeight;
     object.dx = data.dx - data.sWidth / 2;
-    object.dy = 800 - data.dy - data.sHeight / 2;
+    object.dy = 700 - data.dy - data.sHeight / 2;
     object.dWidth = data.sWidth;
     object.dHeight = data.sHeight;
     return object

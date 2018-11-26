@@ -1,4 +1,94 @@
 {
   "selected": { "id": "unSelected", "zIndex": -1 },
-  "com": {}
+  "com": {},
+  "ui": {
+    "summon": {}
+  },
+  "units": {
+    "elvenArcher": {
+      "unitData": {
+        "name": "elvenArcher",
+        "interactRightClick": true,
+        "activity": "",
+        "speed": 10,
+        "health": 20,
+        "armor": 1,
+        "damageMin": 1,
+        "damageMax": 3,
+        "range": 250,
+        "attackSpeed": 5,
+        "goto": { "x": 600, "y":400 },
+        "position": { "x": 600, "y":400 }
+      },
+      "spriteData": {
+        "zIndex": 1,
+        "walk": {
+          "imageSource": "./frontend/img/test_sprite_archer.png",
+          "walk0": {
+            "sx": 0,
+            "sy": 0,
+            "sWidth": 50,
+            "sHeight": 50
+          },
+          "walk1": {
+            "sx": 50,
+            "sy": 0,
+            "sWidth": 50,
+            "sHeight": 50
+          },
+          "walk2": {
+            "sx": 100,
+            "sy": 0,
+            "sWidth": 50,
+            "sHeight": 50
+          },
+          "walk3": {
+            "sx": 150,
+            "sy": 0,
+            "sWidth": 50,
+            "sHeight": 50
+          },
+          "walk4": {
+            "sx": 200,
+            "sy": 0,
+            "sWidth": 50,
+            "sHeight": 50
+          }
+        },
+        "idle": {
+          "imageSource": "./frontend/img/archer.png",
+          "idle0": {
+            "sx": 0,
+            "sy": 0,
+            "sWidth": 46,
+            "sHeight": 50
+          },
+          "idle1": {
+            "sx": 46,
+            "sy": 0,
+            "sWidth": 46,
+            "sHeight": 50
+          },
+          "idle2": {
+            "sx": 92,
+            "sy": 0,
+            "sWidth": 46,
+            "sHeight": 50
+          },
+          "idle3": {
+            "sx": 138,
+            "sy": 0,
+            "sWidth": 46,
+            "sHeight": 50
+          },
+          "idle4": {
+            "sx": 184,
+            "sy": 0,
+            "sWidth": 46,
+            "sHeight": 50
+          }
+        }
+      }
+    }
+  }
 }

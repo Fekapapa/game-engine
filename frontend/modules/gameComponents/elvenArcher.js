@@ -119,7 +119,7 @@ const CreateElvenArcher = (status, coordinates) => {
 }
 
 const ElvenArcher = (state, toRender) => {
-  const unitCounter = state[unitData.name].amount;
+  const unitCounter = state["elvenArcher"];
   let localState = {};
   let i = 0;
 

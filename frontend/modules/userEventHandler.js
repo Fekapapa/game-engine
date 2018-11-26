@@ -10,7 +10,7 @@ const UserEventHandler = () => {
 
 const MouseEventCatch = (e) => {
   const clickX = e.offsetX;
-  const clickY = 800 - e.offsetY;
+  const clickY = 700 - e.offsetY;
   let clickButton;
   const clickedElements = [];
   const state = GetState();

@@ -1,6 +1,6 @@
 'use strict'
 
-import { StoreData } from "../../main.js";
+import { Init } from "../../main.js";
 
 const GetData = () => {
   const http = new XMLHttpRequest();
@@ -8,7 +8,7 @@ const GetData = () => {
   http.onreadystatechange = function xhrRequest() {
     if (http.readyState === 4 && http.status === 200) {
       const xhrResponse = JSON.parse(http.response);
-      StoreData(xhrResponse);
+      Init(xhrResponse);
     }
   }
   http.open('GET', '/data');

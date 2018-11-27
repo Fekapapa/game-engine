@@ -1,48 +1,58 @@
 'use strict'
 
 import { GetState, SetState } from "../../../../main.js";
+import { PositionActivityCalc } from "./positionActivityCalc.js";
+
+let img = 0;
+let frame = 0;
+
+const framecounter = (unitState, prevActivity) => {
+  frame = unitState.frame;
+
+  if (unitState.activity !== prevActivity || frame === 40) {
+    frame = 0;
+    img = 0
+  } else if (frame === 10) {
+      img = 1
+  } else if (frame === 20) {
+      img = 2
+  } else if (frame === 30) {
+      img = 4
+  }
+  frame++;
+
+  return img
+}
 
 const UpdateElement = (toRender) => {
-  const unitsToUpdate = GetState().com;
+  const state = GetState();
+  const unitsToUpdate = state.com;
+  let prevActivity = "";
 
-//innen folytatni a modul létrehozását!
+  for (let unitData in unitsToUpdate) {
+    let unitState = PositionActivityCalc(unitsToUpdate[unitData], unitsToUpdate[unitData].unitId);
+    const elementName = unitData.replace(unitData.match(/\d/g)[0], "");
 
-  const unitCounter = state["elvenArcher"];
-  let localState = {};
-  let i = 0;
-
-  for (i; i <= unitCounter; i++) {
-    localState = PositionActivityCalc(state, "elvenArcher0")["elvenArcher0"];
-    const framecounter = () => {
-      if (localState.activity !== prevActivity || frame === 40) {
-        frame = 0;
-        img = 0
-      } else if (frame === 10) {
-          img = 1
-      } else if (frame === 20) {
-          img = 2
-      } else if (frame === 30) {
-          img = 4
-      } else if (frame === 40) {
-          img = 4
-      }
-      frame++;
-    }
-    framecounter()
-    const activityFrame = localState.activity + img;
-
-    const nextFrame = spriteData[localState.activity][activityFrame];
-    nextFrame.id = localState.unitId;
-    nextFrame.interactRightClick = localState.interactRightClick;
-    nextFrame.dx = localState.position.x;
-    nextFrame.dy = localState.position.y;
-    nextFrame.src = spriteData[localState.activity].imageSource;
+    const spriteData = state.units[elementName].spriteData;
+    const activityFrame = unitState.activity + framecounter(unitState, prevActivity);
+    const nextFrame = spriteData[unitState.activity][activityFrame];
+    nextFrame.id = unitState.unitId;
+    nextFrame.interactRightClick = unitState.interactRightClick;
+    nextFrame.dx = unitState.position.x;
+    nextFrame.dy = unitState.position.y;
+    nextFrame.src = spriteData[unitState.activity].imageSource;
     nextFrame.zIndex = spriteData.zIndex;
-    prevActivity = localState.activity;
+    prevActivity = unitState.activity;
+
+    state.com[unitData].sWidth = nextFrame.sWidth;
+    state.com[unitData].sHeight = nextFrame.sHeight;
+    state.com[unitData].zIndex = nextFrame.zIndex;
+    unitState.frame = frame;
+    state.com[unitData] = unitState;
+    SetState(state);
 
     toRender.push(nextFrame);
   }
 }
-
 
 export { UpdateElement };

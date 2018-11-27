@@ -12,8 +12,9 @@ const CreateElement = (name, coordinates) => {
   if (!com[`${name}0`]) {
     unitId = `${name}0`;
     sameUnitsList.push(0);
+    unitId = `${name}${sameUnitsList[0]}`;
   } else {
-    for ( key in state ) {
+    for ( let key in com ) {
       if (key.includes(name)) {
         sameUnitsList.push(Number(key.replace(name, "")));
       }
@@ -23,16 +24,18 @@ const CreateElement = (name, coordinates) => {
       return b - a;
     });
 
-    unitId = `${name}${sortedsameUnitsList[0]}`;
+    unitId = `${name}${sortedsameUnitsList[0] + 1}`;
   }
 
-  com[name] = {};
-  com[name].amount = sameUnitsList.length - 1;
-  com[name][unitId] = unitData;
-  com[name][unitId].unitId = unitId;
-  com[name][unitId].position = coordinates;
+  com[unitId] = unitData;
+  com[unitId].unitId = unitId;
+  com[unitId].position = coordinates;
+  state.com = com;
 
   SetState(state);
+  console.log(com[unitId].position)
+  console.log(state.com[unitId].position)
+
 }
 
 export { CreateElement };

@@ -31,12 +31,13 @@ const MouseEventCatch = (e) => {
 
   if (clickButton === 0) {
     const detectElement = (id, element) => {
-        if (clickX <= (element.dx + element.sWidth / 2) && clickX >= (element.dx - element.sWidth / 2)) {
-          if (clickY <= (element.dy + element.sHeight / 2) && clickY >= (element.dy - element.sHeight / 2)) {
+
+        if (clickX <= (element.position.x + element.sWidth / 2) && clickX >= (element.position.x - element.sWidth / 2)) {
+          if (clickY <= (element.position.y + element.sHeight / 2) && clickY >= (element.position.y - element.sHeight / 2)) {
             if (element.interactRightClick) {
               clickedElements.push(element);
             } else {
-              clickedElements.push({ id: "unSelected", zIndex: -1 });
+              clickedElements.push({ name: "unSelected", zIndex: -1 });
             }
           }
         }
@@ -49,11 +50,12 @@ const MouseEventCatch = (e) => {
     const sortedClickedElements = clickedElements.sort(function (a, b) {
       return b.zIndex - a.zIndex;
     });
+
     state.selected = sortedClickedElements[0];
   }
 
-  if (clickButton === 2 && state.selected.id !== "unSelected" ) {
-    state[state.selected.id].goto = {x: clickX, y: clickY };
+  if (clickButton === 2 && state.selected.name !== "unSelected" ) {
+    state.selected.goto = {x: clickX, y: clickY };
   }
 
   SetState(state);

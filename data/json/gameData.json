@@ -5,6 +5,24 @@
     "summon": {}
   },
   "units": {
+    "background": {
+      "unitData": {
+        "name": "background",
+        "frame": 0
+      },
+      "spriteData": {
+        "zIndex": -1,
+        "idle": {
+          "imageSource": "./frontend/img/background.png",
+          "idle0": {
+            "sx": 0,
+            "sy": 0,
+            "sWidth": 1200,
+            "sHeight": 800
+          }
+        }
+      }
+    },
     "elvenArcher": {
       "unitData": {
         "name": "elvenArcher",
@@ -18,7 +36,8 @@
         "range": 250,
         "attackSpeed": 5,
         "goto": { "x": 600, "y":400 },
-        "position": { "x": 600, "y":400 }
+        "position": {},
+        "frame": 0
       },
       "spriteData": {
         "zIndex": 1,

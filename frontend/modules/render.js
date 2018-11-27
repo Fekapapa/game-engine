@@ -39,11 +39,6 @@ const Render = (data) => {
   }
 
   while (length--) {
-
-    const state = GetState();
-
-    SetState(state);
-
     const dataToRender = coordinateCalc(sortedData[length]);
     ctx.drawImage(
     imageInit[length],
@@ -58,7 +53,6 @@ const Render = (data) => {
     )
 
     imageInit[length].src = dataToRender.src;
-    state.com[sortedData[length].id] = sortedData[length];
   }
 }
 

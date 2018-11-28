@@ -54,11 +54,14 @@ const MouseEventCatch = (e) => {
     state.selected = sortedClickedElements[0];
   }
 
-  if (clickButton === 2 && state.selected.name !== "unSelected" ) {
-    state.selected.goto = {x: clickX, y: clickY };
+  if (clickButton === 2 && state.selected.name !== "unSelected") {
+    state.selected.goto = Object.assign({}, {x: clickX, y: clickY });
   }
 
   SetState(state);
+console.log(state.selected)
+console.log(state.com)
+
   e.preventDefault();
   e.stopPropagation();
   return false;

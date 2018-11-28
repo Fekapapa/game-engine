@@ -1,7 +1,5 @@
 'use strict'
 
-import { Main, GetState, SetState } from "../../main.js";
-
 let canvas;
 let ctx;
 const imageInit = [];

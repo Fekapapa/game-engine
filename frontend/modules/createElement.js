@@ -5,7 +5,7 @@ import { GetState, SetState } from "../../../../main.js";
 const CreateElement = (name, coordinates) => {
   const state = GetState();
   const com = state.com;
-  const unitData = state.units[name].unitData;
+  const unitData = Object.assign({}, state.units[name].unitData);
   const sameUnitsList = [];
   let unitId = "";
 
@@ -30,11 +30,9 @@ const CreateElement = (name, coordinates) => {
   com[unitId] = unitData;
   com[unitId].unitId = unitId;
   com[unitId].position = coordinates;
-  state.com = com;
+  state.com[unitId] = com[unitId];
 
   SetState(state);
-  console.log(com[unitId].position)
-  console.log(state.com[unitId].position)
 
 }
 

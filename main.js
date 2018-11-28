@@ -12,22 +12,23 @@ let state = {};
 const Init = (data) => {
   state = data;
   UserEventHandler();
-  RenderInit(6);
-  //CreateElement("background", {x: 550, y: 350 });
-  CreateElement("elvenArcher", {x: 550, y: 50 });
-  CreateElement("elvenArcher", {x: 550, y: 150 });
-  CreateElement("elvenArcher", {x: 550, y: 250 });
-  CreateElement("elvenArcher", {x: 550, y: 350 });
-  CreateElement("elvenArcher", {x: 550, y: 450 });
+  RenderInit(7);
+  CreateElement("background", {x: 550, y: 350 });
+  CreateElement("elvenArcher", {x: 50, y: 50 });
+  CreateElement("elvenArcher", {x: 150, y: 150 });
+  CreateElement("elvenArcher", {x: 250, y: 250 });
+  CreateElement("elvenArcher", {x: 350, y: 350 });
+  CreateElement("elvenArcher", {x: 450, y: 450 });
   CreateElement("elvenArcher", {x: 550, y: 550 });
   Main();
+
 }
 
-const SetState = (state) => {
-  state = Object.assign(state);
+const SetState = (newState) => {
+  state = Object.assign({}, newState);
 }
 
-const GetState = () => Object.assign(state);
+const GetState = () => Object.assign({}, state);
 
 const Main = () => {
   const toRender = [];

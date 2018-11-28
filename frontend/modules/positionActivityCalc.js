@@ -1,12 +1,16 @@
 'use strict'
 
 const PositionActivityCalc = (unitData, unitId) => {
+  unitData.prevActivity = unitData.activity;
+  //console.log(unitData.position)
+
   if (!unitData.goto) {
     unitData.activity = "idle";
   } else {
     if (!unitData.goto.x) {
-      unitData.goto.x = unitData.position.x;
-      unitData.goto.y = unitData.position.y;
+      //unitData.goto.x = Object.assign({}, unitData).position.x;
+      //unitData.goto.y = Object.assign({}, unitData).position.y;
+      unitData.activity = "idle";
     } else {
       const deltaX = unitData.goto.x - unitData.position.x;
       const deltaY = unitData.goto.y - unitData.position.y;

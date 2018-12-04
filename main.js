@@ -12,14 +12,20 @@ let state = {};
 const Init = (data) => {
   state = data;
   UserEventHandler();
-  RenderInit(7);
+  RenderInit(1201);
   CreateElement("background", {x: 550, y: 350 });
-  CreateElement("elvenArcher", {x: 50, y: 50 });
-  CreateElement("elvenArcher", {x: 150, y: 150 });
-  CreateElement("elvenArcher", {x: 250, y: 250 });
-  CreateElement("elvenArcher", {x: 350, y: 350 });
-  CreateElement("elvenArcher", {x: 450, y: 450 });
-  CreateElement("elvenArcher", {x: 550, y: 550 });
+  let i = 1200;
+  let hangya = 25;
+  let alma = 0;
+  while (i--) {
+    if (i % 20 === 0) {
+      hangya += 50;
+      alma = 0;
+    }
+    CreateElement("elvenArcher", {x: 1075 - alma, y: hangya });
+    alma += 50;
+
+  }
   Main();
 
 }

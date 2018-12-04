@@ -10,7 +10,7 @@ const UpdateElement = (toRender) => {
   for (let unitId in unitsToUpdate) {
     if (unitsToUpdate.hasOwnProperty(unitId)) {
       let unitState = PositionActivityCalc(unitsToUpdate[unitId], state.selected);
-      const elementName = unitId.replace(unitId.match(/\d/g)[0], "");
+      const elementName = unitId.replace(unitId.match(/\d/g).join(""), "");
       const spriteData = Object.assign({}, state.units[elementName].spriteData);
 
       if (unitState.activity !== unitState.prevActivity || unitState.frame === 40) {

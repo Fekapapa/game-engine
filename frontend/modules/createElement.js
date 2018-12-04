@@ -30,10 +30,9 @@ const CreateElement = (name, coordinates) => {
   com[unitId] = unitData;
   com[unitId].unitId = unitId;
   com[unitId].position = coordinates;
-  state.com[unitId] = com[unitId];
 
+  state.com[unitId] = Object.assign({}, com[unitId]);
   SetState(state);
-
 }
 
 export { CreateElement };

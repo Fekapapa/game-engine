@@ -31,23 +31,22 @@ const MouseEventCatch = (e) => {
 
   if (clickButton === 0) {
     const detectElement = (id, element) => {
-
-        if (clickX <= (element.position.x + element.sWidth / 2) && clickX >= (element.position.x - element.sWidth / 2)) {
-          if (clickY <= (element.position.y + element.sHeight / 2) && clickY >= (element.position.y - element.sHeight / 2)) {
-            if (element.interactRightClick) {
-              clickedElements.push(element);
-            } else {
-              clickedElements.push({ name: "unSelected", zIndex: -1 });
-            }
+      if (clickX <= (element.position.x + element.sWidth / 2) && clickX >= (element.position.x - element.sWidth / 2)) {
+        if (clickY <= (element.position.y + element.sHeight / 2) && clickY >= (element.position.y - element.sHeight / 2)) {
+          if (element.interactRightClick) {
+            clickedElements.push(element);
+          } else {
+            clickedElements.push({ name: "unSelected", zIndex: -1 });
           }
         }
       }
+    }
 
     Object.entries(state.com).forEach(
         ([key, value]) => detectElement(key, value)
     );
 
-    const sortedClickedElements = clickedElements.sort(function (a, b) {
+    let sortedClickedElements = clickedElements.sort(function (a, b) {
       return b.zIndex - a.zIndex;
     });
 
@@ -59,8 +58,6 @@ const MouseEventCatch = (e) => {
   }
 
   SetState(state);
-console.log(state.selected)
-console.log(state.com)
 
   e.preventDefault();
   e.stopPropagation();

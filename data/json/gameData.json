@@ -8,10 +8,14 @@
     "background": {
       "unitData": {
         "name": "background",
-        "frame": 0
+        "frame": 0,
+        "frameImg": 0,
+        "sWidth": 1200,
+        "sHeight": 800,
+        "zIndex": -1,
+        "facing": "right"
       },
       "spriteData": {
-        "zIndex": -1,
         "idle": {
           "imageSource": "./frontend/img/background.png",
           "idle0": {
@@ -62,10 +66,14 @@
         "attackSpeed": 5,
         "goto": {},
         "position": {},
-        "frame": 0
+        "frame": 0,
+        "frameImg": 0,
+        "sWidth": 46,
+        "sHeight": 50,
+        "zIndex": 1,
+        "facing": "right"
       },
       "spriteData": {
-        "zIndex": 1,
         "walk": {
           "imageSource": "./frontend/img/test_sprite_archer.png",
           "walk0": {

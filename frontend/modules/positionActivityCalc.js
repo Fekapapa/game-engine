@@ -1,39 +1,46 @@
 'use strict'
 
-const PositionActivityCalc = (unitData, unitId) => {
-  unitData.prevActivity = unitData.activity;
-  //console.log(unitData.position)
+const PositionActivityCalc = (unitData, selected) => {
+  const unit = Object.assign({}, unitData);
+  const select = Object.assign({}, selected);
+  unit.prevActivity = unit.activity;
 
-  if (!unitData.goto) {
-    unitData.activity = "idle";
+  if (selected.name !== "unSelected") {
+    if (selected.unitId === unit.unitId) {
+      unit.goto = select.goto;
+    }
+  }
+  if (!unit.goto) {
+    unit.activity = "idle";
   } else {
-    if (!unitData.goto.x) {
-      //unitData.goto.x = Object.assign({}, unitData).position.x;
-      //unitData.goto.y = Object.assign({}, unitData).position.y;
-      unitData.activity = "idle";
+    if (!unit.goto.x) {
+      unit.activity = "idle";
+
     } else {
-      const deltaX = unitData.goto.x - unitData.position.x;
-      const deltaY = unitData.goto.y - unitData.position.y;
+      const deltaX = unit.goto.x - unit.position.x;
+      const deltaY = unit.goto.y - unit.position.y;
       const distance = Math.sqrt(deltaX*deltaX+deltaY*deltaY);
+
+      unit.facing = deltaX >= 0 ? "right" : "left";
 
       let velocityX = 0;
       let velocityY = 0;
 
       if (distance !== 0) {
-        velocityX = (deltaX/distance) * unitData.speed/5;
-        velocityY = (deltaY/distance) * unitData.speed/5;
-        unitData.activity = "walk";
-        unitData.position.x += velocityX;
-        unitData.position.y += velocityY;
+        velocityX = (deltaX/distance) * unit.speed/5;
+        velocityY = (deltaY/distance) * unit.speed/5;
+        unit.activity = "walk";
+        unit.position.x += velocityX;
+        unit.position.y += velocityY;
       }
-      if (distance < unitData.speed/5){
-        unitData.position.x = unitData.goto.x;
-        unitData.position.y = unitData.goto.y;
-        unitData.activity = "idle";
+      if (distance < unit.speed/5){
+        unit.position.x = unit.goto.x;
+        unit.position.y = unit.goto.y;
+        unit.activity = "idle";
       }
     }
   }
-  return unitData
+  return unit
 }
 
 export { PositionActivityCalc };

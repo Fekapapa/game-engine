@@ -33,6 +33,13 @@ const Render = (data) => {
     object.dy = 700 - data.dy - data.sHeight / 2;
     object.dWidth = data.sWidth;
     object.dHeight = data.sHeight;
+    object.facing = data.facing;
+
+    //if (data.facing === "left") {
+    //  object.dWidth = data.sWidth * -1;
+    //  console.log(object.dWidth)
+    //}
+
     return object
   }
 
@@ -49,8 +56,11 @@ const Render = (data) => {
     dataToRender.dWidth,
     dataToRender.dHeight
     )
-
+    //dataToRender.facing === "left" && ctx.scale(1, -1);
+    //console.log(dataToRender.facing)
     imageInit[length].src = dataToRender.src;
+    ctx.restore();
+
   }
 }
 

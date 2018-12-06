@@ -10,11 +10,12 @@ import { Background } from "./frontend/modules/gameComponents/background.js";
 let state = {};
 
 const Init = (data) => {
+  const start = new Date();
   state = data;
   UserEventHandler();
-  RenderInit(1201);
+  RenderInit(1001);
   CreateElement("background", {x: 550, y: 350 });
-  let i = 1200;
+  let i = 1000;
   let hangya = 25;
   let alma = 0;
   while (i--) {
@@ -26,8 +27,9 @@ const Init = (data) => {
     alma += 50;
 
   }
+  const end =  new Date();
+  console.log("Main init time: ", end-start)
   Main();
-
 }
 
 const SetState = (newState) => {

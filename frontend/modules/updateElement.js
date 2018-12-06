@@ -3,7 +3,12 @@
 import { GetState, SetState } from "../../../../main.js";
 import { PositionActivityCalc } from "./positionActivityCalc.js";
 
+let timerHelper = 0;
+
 const UpdateElement = (toRender) => {
+  timerHelper += 1;
+  const start = new Date();
+
   const state = GetState();
   const unitsToUpdate = Object.assign({}, state.com);
 
@@ -45,6 +50,12 @@ const UpdateElement = (toRender) => {
 
       toRender.push(nextFrame);
     }
+  }
+
+  const end = new Date();
+
+  if (timerHelper % 50 === 0) {
+    console.log("Total update time: ", end-start)
   }
 }
 

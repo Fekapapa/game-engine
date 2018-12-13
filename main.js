@@ -14,16 +14,16 @@ const Init = (data) => {
   state = data;
   UserEventHandler();
   RenderInit(1001);
-  CreateElement("background", {x: 550, y: 350 });
-  let i = 100;
+  //CreateElement("background", {x: 550, y: 350 });
+  let i = 3000;
   let hangya = 25;
-  let alma = 0;
+  let alma = 25;
   while (i--) {
-    if (i % 20 === 0) {
+    if (i % 60 === 0) {
       hangya += 50;
-      alma = 0;
+      alma = 25;
     }
-    CreateElement("elvenArcher", {x: 1075 - alma, y: hangya });
+    CreateElement("elvenArcher", {x: alma, y: hangya });
     alma += 50;
 
   }

@@ -40,8 +40,7 @@ const UpdateElement = (toRender) => {
       nextFrame.zIndex = unitState.zIndex;
       nextFrame.facing = unitState.facing;
       nextFrame.frame = activityFrame;
-
-
+      
       state.com[unitId].sWidth = nextFrame.sWidth;
       state.com[unitId].sHeight = nextFrame.sHeight;
       state.com[unitId].zIndex = nextFrame.zIndex;
@@ -56,7 +55,7 @@ const UpdateElement = (toRender) => {
 
   const end = new Date();
 
-  if (timerHelper % 200 === 0) {
+  if (timerHelper % 50 === 0) {
     console.log("Total update time: ", end-start)
   }
 }

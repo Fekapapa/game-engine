@@ -36,9 +36,11 @@ const UpdateElement = (toRender) => {
       nextFrame.interactRightClick = unitState.interactRightClick;
       nextFrame.dx = unitState.position.x;
       nextFrame.dy = unitState.position.y;
-      nextFrame.src = spriteData[unitState.activity].imageSource;
+      nextFrame.type = elementName;
       nextFrame.zIndex = unitState.zIndex;
       nextFrame.facing = unitState.facing;
+      nextFrame.frame = activityFrame;
+
 
       state.com[unitId].sWidth = nextFrame.sWidth;
       state.com[unitId].sHeight = nextFrame.sHeight;
@@ -54,7 +56,7 @@ const UpdateElement = (toRender) => {
 
   const end = new Date();
 
-  if (timerHelper % 50 === 0) {
+  if (timerHelper % 200 === 0) {
     console.log("Total update time: ", end-start)
   }
 }

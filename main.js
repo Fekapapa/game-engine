@@ -15,7 +15,7 @@ const Init = (data) => {
   UserEventHandler();
   RenderInit(1001);
   CreateElement("background", {x: 550, y: 350 });
-  let i = 1000;
+  let i = 100;
   let hangya = 25;
   let alma = 0;
   while (i--) {

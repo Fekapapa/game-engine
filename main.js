@@ -13,9 +13,9 @@ const Init = (data) => {
   const start = new Date();
   state = data;
   UserEventHandler();
-  RenderInit(1001);
-  //CreateElement("background", {x: 550, y: 350 });
-  let i = 3000;
+  RenderInit();
+  CreateElement("background", {x: 550, y: 350 });
+  let i = 1000;
   let hangya = 25;
   let alma = 25;
   while (i--) {
@@ -25,8 +25,8 @@ const Init = (data) => {
     }
     CreateElement("elvenArcher", {x: alma, y: hangya });
     alma += 50;
-
   }
+  
   const end =  new Date();
   console.log("Main init time: ", end-start)
   Main();

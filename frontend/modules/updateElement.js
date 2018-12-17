@@ -10,13 +10,16 @@ const UpdateElement = (toRender) => {
   const start = new Date();
 
   const state = GetState();
-  const unitsToUpdate = Object.assign({}, state.com);
+  const unitsToUpdate = state.com;
 
   for (let unitId in unitsToUpdate) {
-    if (unitsToUpdate.hasOwnProperty(unitId)) {
       let unitState = PositionActivityCalc(unitsToUpdate[unitId], state.selected);
-      const elementName = unitId.replace(unitId.match(/\d/g).join(""), "");
-      const spriteData = Object.assign({}, state.units[elementName].spriteData);
+
+      // This line is 2x slower than the whole update process.
+      //const elementName = unitId.replace(unitId.match(/\d/g).join(""), "");
+      const elementName = unitsToUpdate[unitId].name;
+
+      const spriteData = state.units[elementName].spriteData;
 
       if (unitState.activity !== unitState.prevActivity || unitState.frame === 40) {
         unitState.frame = 0;
@@ -40,18 +43,17 @@ const UpdateElement = (toRender) => {
       nextFrame.zIndex = unitState.zIndex;
       nextFrame.facing = unitState.facing;
       nextFrame.frame = activityFrame;
-      
+
       state.com[unitId].sWidth = nextFrame.sWidth;
       state.com[unitId].sHeight = nextFrame.sHeight;
       state.com[unitId].zIndex = nextFrame.zIndex;
       unitState.frame++;
 
-      state.com[unitId] = Object.assign({}, unitState);
-      SetState(state);
+      state.com[unitId] = unitState;
 
       toRender.push(nextFrame);
-    }
   }
+  SetState(state);
 
   const end = new Date();
 

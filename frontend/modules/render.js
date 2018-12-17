@@ -9,7 +9,7 @@ const preloadedImages = {
   background: {}
 };
 
-const RenderInit = (length) => {
+const RenderInit = () => {
   const start = new Date();
 
   canvas = document.getElementById('gameCanvas-1');
@@ -73,7 +73,7 @@ const Render = (data) => {
       ctx.drawImage(
         preloadedImages[sortedData[length].type][sortedData[length].frame],
         sortedData[length].dx - sortedData[length].sWidth / 2,
-        2600 - sortedData[length].dy - sortedData[length].sHeight / 2
+        700 - sortedData[length].dy - sortedData[length].sHeight / 2
       )
     }
   }

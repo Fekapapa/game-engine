@@ -1,8 +1,8 @@
 'use strict'
 
 const PositionActivityCalc = (unitData, selected) => {
-  const unit = Object.assign({}, unitData);
-  const select = Object.assign({}, selected);
+  const unit = unitData;
+  const select = selected;
   unit.prevActivity = unit.activity;
 
   if (selected.name !== "unSelected") {

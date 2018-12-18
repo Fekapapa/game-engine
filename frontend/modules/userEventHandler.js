@@ -1,11 +1,11 @@
 'use strict'
 
-import { SetState, GetState } from "../../main.js";
+import { SetState, GetState } from '../../main.js';
 
 const UserEventHandler = () => {
   const canvas = document.getElementById('gameCanvas-1');
-  canvas.addEventListener("click", MouseEventCatch, false);
-  canvas.addEventListener("contextmenu", MouseEventCatch, false);
+  canvas.addEventListener('click', MouseEventCatch, false);
+  canvas.addEventListener('contextmenu', MouseEventCatch, false);
 }
 
 const MouseEventCatch = (e) => {
@@ -36,7 +36,7 @@ const MouseEventCatch = (e) => {
           if (element.interactRightClick) {
             clickedElements.push(element);
           } else {
-            clickedElements.push({ name: "unSelected", zIndex: -1 });
+            clickedElements.push({ name: 'unSelected', zIndex: -1 });
           }
         }
       }
@@ -53,7 +53,7 @@ const MouseEventCatch = (e) => {
     state.selected = sortedClickedElements[0];
   }
 
-  if (clickButton === 2 && state.selected.name !== "unSelected") {
+  if (clickButton === 2 && state.selected.name !== 'unSelected') {
     state.selected.goto = Object.assign({}, {x: clickX, y: clickY });
   }
 

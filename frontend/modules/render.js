@@ -3,7 +3,6 @@
 let timerHelper = 0;
 let canvas;
 let ctx;
-const imageInit = [];
 const preloadedImages = {
   elvenArcher: {},
   background: {}
@@ -23,7 +22,7 @@ const imagePreload = (start) => {
   const context = shadowCanvas.getContext('2d');
 
   const idle = new Image();
-  idle.src = "./frontend/img/archer.png";
+  idle.src = './frontend/assets/images/archer.png';
   idle.onload = () => {
     Promise.all([
       createImageBitmap(idle, 0, 0, 46, 50),
@@ -41,7 +40,7 @@ const imagePreload = (start) => {
   }
 
   const idle1 = new Image();
-  idle1.src = "./frontend/img/background.png";
+  idle1.src = './frontend/assets/images/background.png';
   idle1.onload = () => {
     Promise.all([
       createImageBitmap(idle1, 0, 0, 1200, 800),
@@ -54,7 +53,7 @@ const imagePreload = (start) => {
     });
   }
   const end = new Date();
-  console.log("Render init time: ", end-start)
+  console.log('Render init time: ', end-start)
 }
 
 const Render = (data) => {
@@ -64,7 +63,7 @@ const Render = (data) => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   let length = data.length;
 
-  let sortedData = data.sort(function (a, b) {
+  const sortedData = data.sort(function (a, b) {
     return b.zIndex - a.zIndex;
   });
 
@@ -81,7 +80,7 @@ const Render = (data) => {
   const end = new Date();
 
   if (timerHelper % 50 === 0) {
-    console.log("Total render time: ", end-start)
+    console.log('Total render time: ', end-start)
   }
 }
 

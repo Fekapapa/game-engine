@@ -1,13 +1,13 @@
 'use strict'
 
-import { GetState, SetState } from "../../../../main.js";
+import { GetState, SetState } from '../../../../main.js';
 
 const CreateElement = (name, coordinates) => {
   const state = GetState();
   const com = state.com;
   const unitData = Object.assign({}, state.units[name].unitData);
   const sameUnitsList = [];
-  let unitId = "";
+  let unitId = '';
 
   if (!com[`${name}0`]) {
     unitId = `${name}0`;
@@ -16,7 +16,7 @@ const CreateElement = (name, coordinates) => {
   } else {
     for ( let key in com ) {
       if (key.includes(name)) {
-        sameUnitsList.push(Number(key.replace(name, "")));
+        sameUnitsList.push(Number(key.replace(name, '')));
       }
     }
 

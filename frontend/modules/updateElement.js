@@ -1,7 +1,7 @@
 'use strict'
 
-import { GetState, SetState } from "../../../../main.js";
-import { PositionActivityCalc } from "./positionActivityCalc.js";
+import { GetState, SetState } from '../../../../main.js';
+import { PositionActivityCalc } from './positionActivityCalc.js';
 
 let timerHelper = 0;
 
@@ -13,12 +13,11 @@ const UpdateElement = (toRender) => {
   const unitsToUpdate = state.com;
 
   for (let unitId in unitsToUpdate) {
-      let unitState = PositionActivityCalc(unitsToUpdate[unitId], state.selected);
+      const unitState = PositionActivityCalc(unitsToUpdate[unitId], state.selected);
 
       // This line is 2x slower than the whole update process.
-      //const elementName = unitId.replace(unitId.match(/\d/g).join(""), "");
+      //const elementName = unitId.replace(unitId.match(/\d/g).join(''), '');
       const elementName = unitsToUpdate[unitId].name;
-
       const spriteData = state.units[elementName].spriteData;
 
       if (unitState.activity !== unitState.prevActivity || unitState.frame === 40) {
@@ -58,7 +57,7 @@ const UpdateElement = (toRender) => {
   const end = new Date();
 
   if (timerHelper % 50 === 0) {
-    console.log("Total update time: ", end-start)
+    console.log('Total update time: ', end-start)
   }
 }
 

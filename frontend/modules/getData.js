@@ -1,6 +1,6 @@
 'use strict'
 
-import { Init } from "../../main.js";
+import { Init } from '../../main.js';
 
 const GetData = () => {
   const http = new XMLHttpRequest();

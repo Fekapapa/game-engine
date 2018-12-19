@@ -27,13 +27,13 @@ const PositionActivityCalc = (unitData, selected) => {
       let velocityY = 0;
 
       if (distance !== 0) {
-        velocityX = (deltaX / distance) * unit.speed/5;
-        velocityY = (deltaY / distance) * unit.speed/5;
-        unit.activity = 'walk';
+        velocityX = (deltaX / distance) * unit.speed / 10;
+        velocityY = (deltaY / distance) * unit.speed / 10;
+        unit.activity = 'run';
         unit.position.x += velocityX;
         unit.position.y += velocityY;
       }
-      if (distance < unit.speed / 5){
+      if (distance < unit.speed / 10){
         unit.position.x = unit.goto.x;
         unit.position.y = unit.goto.y;
         unit.activity = 'idle';

@@ -15,15 +15,15 @@ const Init = (data) => {
   RenderInit();
   CreateElement('background', {x: 550, y: 350 });
   let i = 1000;
-  let hangya = 25;
-  let alma = 25;
+  let hangya = 18;
+  let alma = 18;
   while (i--) {
-    if (i % 60 === 0) {
-      hangya += 50;
-      alma = 25;
+    if (i % 35 === 0) {
+      hangya += 35;
+      alma = 18;
     }
-    CreateElement('elvenArcher', {x: alma, y: hangya });
-    alma += 50;
+    CreateElement('orc', {x: alma, y: hangya });
+    alma += 35;
   }
 
   const end =  new Date();

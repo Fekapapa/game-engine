@@ -5,7 +5,7 @@ const http = require('http');
 const path = require('path');
 const port = 3000;
 
-const gameData = JSON.parse(fs.readFileSync('./data/json/gameData.json'));
+const gameData = JSON.parse(fs.readFileSync('./data/json/gameData2.json'));
 
 http.createServer(function(req, res){
 	const filePath = path.join(__dirname, './', req.url );

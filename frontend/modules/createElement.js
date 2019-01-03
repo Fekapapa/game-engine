@@ -2,10 +2,14 @@
 
 import { GetState, SetState } from '../../../../main.js';
 
-const CreateElement = (name, coordinates) => {
+const CreateElement = (name, coordinates, eventListener = null) => {
   const state = GetState();
   const com = state.com;
   const unitData = Object.assign({}, state.units[name].unitData);
+  if (eventListener) {
+    unitData.eventListener = eventListener;
+  }
+
   const sameUnitsList = [];
   let unitId = '';
 
@@ -35,4 +39,14 @@ const CreateElement = (name, coordinates) => {
   SetState(state);
 }
 
-export { CreateElement };
+const CreateBatchElement = (elements) => {
+  elements.forEach((element) => {
+    if (element.eventListener) {
+      CreateElement(element.name, element.coordinates, element.eventListener)
+    } else {
+      CreateElement(element.name, element.coordinates)
+    }
+  })
+}
+
+export { CreateElement, CreateBatchElement };

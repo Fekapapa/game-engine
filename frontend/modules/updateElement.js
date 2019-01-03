@@ -21,7 +21,6 @@ const UpdateElement = (toRender) => {
       const spriteData = state.units[elementName].spriteData;
 
       if (unitState.activity !== unitState.prevActivity || unitState.frame === unitState.frameCount * 6) {
-
         unitState.frame = 0;
         unitState.frameImg = 0
       } else if (unitState.frame % 6 === 0) {

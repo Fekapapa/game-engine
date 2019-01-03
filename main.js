@@ -14,13 +14,13 @@ const Init = (data) => {
   state = data;
   UserEventHandler();
   RenderInit();
-  CreateElement('background', {x: 550, y: 350 });
+  CreateElement('background', { x: 550, y: 350 });
 
   const createWave = () => {
     CreateBatchElement(MapData()[0][0])
   }
 
-  CreateElement('waveCaller', {x: 1050, y: 100 }, createWave);
+  CreateElement('waveCaller', { x: 1065, y: 132 }, createWave);
 
   const end =  new Date();
   console.log('Main init time: ', end-start)

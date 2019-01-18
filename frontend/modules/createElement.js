@@ -2,12 +2,16 @@
 
 import { GetState, SetState } from '../../../../main.js';
 
-const CreateElement = (name, coordinates, eventListener = null) => {
+const CreateElement = (name, coordinates, eventListener = null, route = null) => {
   const state = GetState();
   const com = state.com;
   const unitData = Object.assign({}, state.units[name].unitData);
   if (eventListener) {
     unitData.eventListener = eventListener;
+  }
+
+  if (route) {
+    unitData.route = route;
   }
 
   const sameUnitsList = [];
@@ -39,14 +43,23 @@ const CreateElement = (name, coordinates, eventListener = null) => {
   SetState(state);
 }
 
-const CreateBatchElement = (elements) => {
-  elements.forEach((element) => {
-    if (element.eventListener) {
-      CreateElement(element.name, element.coordinates, element.eventListener)
-    } else {
-      CreateElement(element.name, element.coordinates)
+const CreateWave = (wave) => {
+  let delay = 0;
+
+  wave.units.forEach((element) => {
+    const delayedCreation = () => {
+      if (element.eventListener) {
+        CreateElement(element.name, element.coordinates, element.eventListener)
+      } else if (element.route) {
+        CreateElement(element.name, element.coordinates, null, wave[element.route])
+      } else {
+        CreateElement(element.name, element.coordinates)
+      }
     }
+
+    window.setTimeout(delayedCreation, delay);
+    delay += 200;
   })
 }
 
-export { CreateElement, CreateBatchElement };
+export { CreateElement, CreateWave };

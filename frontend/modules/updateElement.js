@@ -53,7 +53,7 @@ const UpdateElement = (toRender) => {
   const end = new Date();
 
   if (timerHelper % 50 === 0) {
-    console.log('Total update time: ', end-start)
+    //console.log('Total update time: ', end-start)
   }
 }
 

@@ -11,9 +11,11 @@ const UserEventHandler = () => {
 const MouseEventCatch = (e) => {
   const clickX = e.offsetX;
   const clickY = 700 - e.offsetY;
+  console.log(`X: ${clickX}, Y: ${clickY}`)
   let clickButton;
   const clickedElements = [];
   const state = GetState();
+  console.log(state)
 
   switch(e.button) {
       case 1:
@@ -55,7 +57,6 @@ const MouseEventCatch = (e) => {
 
   if (clickButton === 0 && state.selected.eventListener) {
     state.selected.eventListener();
-    console.log(state.selected)
   }
 
   if (clickButton === 2 && state.selected.name !== 'unSelected' && state.selected.class === 'enemyUnit') {

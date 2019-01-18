@@ -3,7 +3,7 @@
 import { Render, RenderInit } from './frontend/modules/render.js';
 import { GetData } from './frontend/modules/getData.js';
 import { UserEventHandler } from './frontend/modules/userEventHandler.js';
-import { CreateElement, CreateBatchElement } from './frontend/modules/createElement.js';
+import { CreateElement, CreateWave } from './frontend/modules/createElement.js';
 import { UpdateElement } from './frontend/modules/updateElement.js';
 import { MapData } from './frontend/mapData/map_01_data.js';
 
@@ -17,10 +17,10 @@ const Init = (data) => {
   CreateElement('background', { x: 550, y: 350 });
 
   const createWave = () => {
-    CreateBatchElement(MapData()[0][0])
+    CreateWave(MapData()[0][0].wave01);
   }
 
-  CreateElement('waveCaller', { x: 1065, y: 132 }, createWave);
+  CreateElement('waveCaller', { x: 1075, y: 132 }, createWave);
 
   const end =  new Date();
   console.log('Main init time: ', end-start)

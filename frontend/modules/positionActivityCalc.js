@@ -5,6 +5,10 @@ const PositionActivityCalc = (unitData, selected) => {
   const select = selected;
   unit.prevActivity = unit.activity;
 
+  if (unit.class === "enemyUnit") {
+    unit.goto = unit.route[unit.routeCount];
+  }
+
   if (selected.name !== 'unSelected') {
     if (selected.unitId === unit.unitId) {
       unit.goto = select.goto;
@@ -33,10 +37,15 @@ const PositionActivityCalc = (unitData, selected) => {
         unit.position.x += velocityX;
         unit.position.y += velocityY;
       }
-      if (distance < unit.speed / 10){
-        unit.position.x = unit.goto.x;
-        unit.position.y = unit.goto.y;
-        unit.activity = 'idle';
+      if (distance < unit.speed / 10) {
+        if (unit.class === "enemyUnit") {
+          unit.routeCount++;
+        } else {
+          console.log("megy")
+          unit.position.x = unit.goto.x;
+          unit.position.y = unit.goto.y;
+          unit.activity = 'idle';
+        }
       }
     }
   }

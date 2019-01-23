@@ -1,12 +1,24 @@
 'use strict'
 
-const PositionActivityCalc = (unitData, selected) => {
+import { GetState, SetState } from '../../../../main.js';
+
+const PositionActivityCalc = (unitData, selected, enemyList, towerList) => {
+  const state = GetState();
   const unit = unitData;
   const select = selected;
   unit.prevActivity = unit.activity;
 
   if (unit.class === "enemyUnit") {
     unit.goto = unit.route[unit.routeCount];
+    enemyList[unitData.unitId] = unitData;
+  }
+
+  if (unit.class === "bullet") {
+    unit.goto = unit.route[unit.routeCount];
+  }
+
+  if (unit.class.toLowerCase().includes("tower")) {
+    towerList[unitData.unitId] = unitData
   }
 
   if (selected.name !== 'unSelected') {
@@ -36,12 +48,12 @@ const PositionActivityCalc = (unitData, selected) => {
         unit.activity = 'run';
         unit.position.x += velocityX;
         unit.position.y += velocityY;
+        unit.distance -= Math.sqrt(velocityX * velocityX + velocityY * velocityY);
       }
       if (distance < unit.speed / 10) {
         if (unit.class === "enemyUnit") {
           unit.routeCount++;
         } else {
-          console.log("megy")
           unit.position.x = unit.goto.x;
           unit.position.y = unit.goto.y;
           unit.activity = 'idle';

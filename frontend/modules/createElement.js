@@ -6,12 +6,33 @@ const CreateElement = (name, coordinates, eventListener = null, route = null) =>
   const state = GetState();
   const com = state.com;
   const unitData = Object.assign({}, state.units[name].unitData);
+
   if (eventListener) {
     unitData.eventListener = eventListener;
   }
 
   if (route) {
     unitData.route = route;
+
+    const distanceCalculator = (route) => {
+      let distance = 0;
+      let i = route.length;
+
+      while (i > 1) {
+        i--;
+        const deltaX = route[i].x - route[i - 1].x;
+        const deltaY = route[i].y - route[i - 1].y;
+
+        distance += Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+      }
+      const deltaX = coordinates.x - route[0].x;
+      const deltaY = coordinates.y - route[0].y;
+
+      distance += Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+      return Math.round(distance)
+    }
+
+    unitData.distance = distanceCalculator(route);
   }
 
   const sameUnitsList = [];
@@ -40,6 +61,7 @@ const CreateElement = (name, coordinates, eventListener = null, route = null) =>
   com[unitId].position = coordinates;
 
   state.com[unitId] = Object.assign({}, com[unitId]);
+
   SetState(state);
 }
 

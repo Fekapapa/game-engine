@@ -70,6 +70,16 @@ const Render = (data) => {
           sortedData[length].dx - sortedData[length].sWidth / 2,
           700 - sortedData[length].dy - sortedData[length].sHeight / 2
         )
+
+        //********************************************//
+        // this only helps to test collision detection
+        if (sortedData[length].type === "archerTowerBasic") {
+          ctx.strokeStyle = "rgb(250, 30, 30)"
+          ctx.beginPath();
+          ctx.arc(sortedData[length].dx, 700 - sortedData[length].dy, 200, 0, Math.PI * 2, true); // Outer circle
+          ctx.stroke();
+        }
+        //********************************************//
       }
     }
 

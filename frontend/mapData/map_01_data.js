@@ -28,9 +28,9 @@ const MapData = () => {
           ],
           "units":
           [
-            { "name": "orc", "route": "route1", "coordinates": { "x": 1150, "y": 150 }},
-            { "name": "orc", "route": "route2", "coordinates": { "x": 1200, "y": 130 }},
-            { "name": "orc", "route": "route1", "coordinates": { "x": 1250, "y": 150 }}
+            { "name": "orcEnemy", "route": "route1", "coordinates": { "x": 1150, "y": 150 }},
+            { "name": "orcEnemy", "route": "route2", "coordinates": { "x": 1200, "y": 130 }},
+            { "name": "orcEnemy", "route": "route1", "coordinates": { "x": 1250, "y": 150 }}
           ]
         }
       }]

@@ -2,6 +2,9 @@
 
 import { GetState, SetState } from '../../../../main.js';
 import { PositionActivityCalc } from './positionActivityCalc.js';
+import { CollisionDetection } from './collisionDetection.js';
+import { TargetFinder } from './targetFinder.js';
+import { FireStarter } from './fireStarter.js';
 
 let timerHelper = 0;
 
@@ -9,11 +12,14 @@ const UpdateElement = (toRender) => {
   timerHelper += 1;
   const start = new Date();
 
-  const state = GetState();
+  let state = GetState();
   const unitsToUpdate = state.com;
+  const enemyList = {};
+  const towerList = {};
+
   for (let unitId in unitsToUpdate) {
 
-      const unitState = PositionActivityCalc(unitsToUpdate[unitId], state.selected);
+      const unitState = PositionActivityCalc(unitsToUpdate[unitId], state.selected, enemyList, towerList);
 
       // This line is 2x slower than the whole update process.
       //const elementName = unitId.replace(unitId.match(/\d/g).join(''), '');
@@ -48,6 +54,13 @@ const UpdateElement = (toRender) => {
 
       toRender.push(nextFrame);
   }
+  state.enemyList = enemyList;
+  state.towerList = towerList;
+
+  state = CollisionDetection(state);
+  state = TargetFinder(state);
+  state = FireStarter(state);
+
   SetState(state);
 
   const end = new Date();

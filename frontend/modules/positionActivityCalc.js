@@ -2,8 +2,8 @@
 
 import { GetState, SetState } from '../../../../main.js';
 
-const PositionActivityCalc = (unitData, selected, enemyList, towerList) => {
-  const state = GetState();
+const PositionActivityCalc = (unitData, selected, enemyList, towerList, unitsToDeleteList) => {
+  let state = GetState();
   const unit = unitData;
   const select = selected;
   unit.prevActivity = unit.activity;
@@ -57,6 +57,11 @@ const PositionActivityCalc = (unitData, selected, enemyList, towerList) => {
           unit.position.x = unit.goto.x;
           unit.position.y = unit.goto.y;
           unit.activity = 'idle';
+        }
+
+        if (unit.class === "bullet") {
+          unitsToDeleteList.push(unit.unitId);
+          //unit.die = true;
         }
       }
     }

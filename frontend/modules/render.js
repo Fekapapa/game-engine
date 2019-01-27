@@ -65,11 +65,20 @@ const Render = (data) => {
       }
     } else {
       if (preloadedImages[sortedData[length].type][sortedData[length].frame]) {
+        ctx.save();
+        if (sortedData[length].angle) {
+          //console.log(sortedData[length].dx)
+          //console.log(sortedData[length].dy)
+          ctx.translate(sortedData[length].sWidth / 2, 700 - sortedData[length].dy - sortedData[length].sHeight / 2);
+          ctx.rotate(sortedData[length].angle);
+        }
         ctx.drawImage(
           preloadedImages[sortedData[length].type][sortedData[length].frame],
           sortedData[length].dx - sortedData[length].sWidth / 2,
           700 - sortedData[length].dy - sortedData[length].sHeight / 2
         )
+        ctx.restore();
+
 
         //********************************************//
         // this only helps to test collision detection
@@ -77,6 +86,10 @@ const Render = (data) => {
           ctx.strokeStyle = "rgb(250, 30, 30)"
           ctx.beginPath();
           ctx.arc(sortedData[length].dx, 700 - sortedData[length].dy, 200, 0, Math.PI * 2, true); // Outer circle
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.arc(sortedData[length].dx, 700 - sortedData[length].dy, 2, 0, Math.PI * 2, true); // Outer circle
           ctx.stroke();
         }
         //********************************************//

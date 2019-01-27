@@ -14,6 +14,9 @@ const FireStarter = (state) => {
 
       let bullet = Object.assign({}, state.towerList[tower].bullet);
 
+      //const angle = Math.atan(opposite / adjacent);
+      const angle = 0.75;
+
       CreateElement(state.towerList[tower].bullet, attackerPosition, null, [targetPosition]);
       state.towerList[tower].attackSpeedCounter = 0;
 

@@ -5,6 +5,8 @@ import { PositionActivityCalc } from './positionActivityCalc.js';
 import { CollisionDetection } from './collisionDetection.js';
 import { TargetFinder } from './targetFinder.js';
 import { FireStarter } from './fireStarter.js';
+import { DeleteElement } from './deleteElement.js';
+import { AreaDamage } from './areaDamage.js';
 
 let timerHelper = 0;
 
@@ -16,13 +18,14 @@ const UpdateElement = (toRender) => {
   const unitsToUpdate = state.com;
   const enemyList = {};
   const towerList = {};
+  const unitsToDeleteList = [];
 
   for (let unitId in unitsToUpdate) {
 
-      const unitState = PositionActivityCalc(unitsToUpdate[unitId], state.selected, enemyList, towerList);
+      const unitState = PositionActivityCalc(unitsToUpdate[unitId], state.selected, enemyList, towerList, unitsToDeleteList);
 
-      // This line is 2x slower than the whole update process.
-      //const elementName = unitId.replace(unitId.match(/\d/g).join(''), '');
+      state = AreaDamage(state);
+
       const elementName = unitsToUpdate[unitId].name;
       const spriteData = state.units[elementName].spriteData;
 
@@ -45,6 +48,10 @@ const UpdateElement = (toRender) => {
       nextFrame.sWidth = unitState.sWidth;
       nextFrame.sHeight = unitState.sHeight;
 
+      if (unitState.angle) {
+        nextFrame.angle = unitState.angle;
+      }
+
       state.com[unitId].sWidth = nextFrame.sWidth;
       state.com[unitId].sHeight = nextFrame.sHeight;
       state.com[unitId].zIndex = nextFrame.zIndex;
@@ -57,9 +64,11 @@ const UpdateElement = (toRender) => {
   state.enemyList = enemyList;
   state.towerList = towerList;
 
+  state = DeleteElement(state, unitsToDeleteList);
   state = CollisionDetection(state);
   state = TargetFinder(state);
   state = FireStarter(state);
+
 
   SetState(state);
 

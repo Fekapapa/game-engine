@@ -2,13 +2,17 @@
 
 import { GetState, SetState } from '../../../../main.js';
 
-const CreateElement = (name, coordinates, eventListener = null, route = null) => {
+const CreateElement = (name, coordinates, eventListener = null, route = null, angle = null) => {
   const state = GetState();
   const com = state.com;
   const unitData = Object.assign({}, state.units[name].unitData);
 
   if (eventListener) {
     unitData.eventListener = eventListener;
+  }
+
+  if (angle) {
+    unitData.angle = angle;
   }
 
   if (route) {

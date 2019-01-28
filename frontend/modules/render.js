@@ -29,7 +29,7 @@ const imagePreload = (start) => {
       images[`img-${unit}-${frame}`] = new Image();
       images[`img-${unit}-${frame}`].src = state.units[unit].spriteData[frame];
       images[`img-${unit}-${frame}`].onload = () => {
-        createImageBitmap(images[`img-${unit}-${frame}`]).then(function(sprite) {
+        createImageBitmap(images[`img-${unit}-${frame}`]).then(sprite => {
           preloadedImages[unit][frame] = sprite;
          });
       }
@@ -56,52 +56,66 @@ const Render = (data) => {
       if (preloadedImages[sortedData[length].type][sortedData[length].frame]) {
         ctx.save();
         ctx.scale(-1, 1);
-        ctx.drawImage(
-          preloadedImages[sortedData[length].type][sortedData[length].frame],
-          -sortedData[length].dx + sortedData[length].sWidth / 2,
-          700 - sortedData[length].dy - sortedData[length].sHeight / 2
-        )
+        if (sortedData[length].type === "orcEnemy") {
+          ctx.drawImage(
+            preloadedImages[sortedData[length].type][sortedData[length].frame],
+            -sortedData[length].dx - sortedData[length].sWidth / 2 + 5,
+            700 - sortedData[length].dy - sortedData[length].sHeight / 2
+          )
+        } else {
+          ctx.drawImage(
+            preloadedImages[sortedData[length].type][sortedData[length].frame],
+            -sortedData[length].dx - sortedData[length].sWidth / 2,
+            700 - sortedData[length].dy - sortedData[length].sHeight / 2
+          )        }
+
         ctx.restore();
       }
     } else {
       if (preloadedImages[sortedData[length].type][sortedData[length].frame]) {
-        ctx.save();
         if (sortedData[length].angle) {
-          //console.log(sortedData[length].dx)
-          //console.log(sortedData[length].dy)
-          ctx.translate(sortedData[length].sWidth / 2, 700 - sortedData[length].dy - sortedData[length].sHeight / 2);
+          ctx.save();
+          ctx.translate(sortedData[length].dx, 700 - sortedData[length].dy);
           ctx.rotate(sortedData[length].angle);
+          ctx.drawImage(
+            preloadedImages[sortedData[length].type][sortedData[length].frame],
+            -sortedData[length].sWidth / 2, -sortedData[length].sHeight / 2
+          );
+          ctx.restore();
+        } else {
+          ctx.drawImage(
+            preloadedImages[sortedData[length].type][sortedData[length].frame],
+            sortedData[length].dx - sortedData[length].sWidth / 2,
+            700 - sortedData[length].dy - sortedData[length].sHeight / 2
+          )
         }
-        ctx.drawImage(
-          preloadedImages[sortedData[length].type][sortedData[length].frame],
-          sortedData[length].dx - sortedData[length].sWidth / 2,
-          700 - sortedData[length].dy - sortedData[length].sHeight / 2
-        )
-        ctx.restore();
 
 
-        //********************************************//
-        // this only helps to test collision detection
-        if (sortedData[length].type === "archerTowerBasic") {
-          ctx.strokeStyle = "rgb(250, 30, 30)"
-          ctx.beginPath();
-          ctx.arc(sortedData[length].dx, 700 - sortedData[length].dy, 200, 0, Math.PI * 2, true); // Outer circle
-          ctx.stroke();
 
-          ctx.beginPath();
-          ctx.arc(sortedData[length].dx, 700 - sortedData[length].dy, 2, 0, Math.PI * 2, true); // Outer circle
-          ctx.stroke();
-        }
-        //********************************************//
+
+
       }
     }
+    //********************************************//
+    // this only helps to test collision detection
+    /*if (sortedData[length].type === "archerTowerBasic") {
+      ctx.strokeStyle = "rgb(250, 30, 30)"
+      ctx.beginPath();
+      ctx.arc(sortedData[length].dx, 700 - sortedData[length].dy, 200, 0, Math.PI * 2, true); // Outer circle
+      ctx.stroke();
+    }
 
+      ctx.beginPath();
+      ctx.arc(sortedData[length].dx, 700 - sortedData[length].dy, 1, 0, Math.PI * 2, true); // Inner circle
+      ctx.arc(sortedData[length].dx, 700 - sortedData[length].dy, 2, 0, Math.PI * 2, true); // Inner circle
+      ctx.stroke();*/
+    //********************************************//
   }
 
   const end = new Date();
 
   if (timerHelper % 50 === 0) {
-    //console.log('Total render time: ', end-start)
+    console.log('Total render time: ', end-start)
   }
 }
 

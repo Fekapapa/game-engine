@@ -7,17 +7,24 @@ const FireStarter = (state) => {
 
     if(state.towerList[tower].attackSpeedCounter >= 600 && Object.entries(state.towerList[tower].target).length !== 0) {
       const attackerPosition = {
-        x: state.towerList[tower].position.x + state.towerList[tower].sWidth / 2 + state.towerList[tower].bulletPoint.x,
-        y: state.towerList[tower].position.y -state.towerList[tower].sHeight / 2 + state.towerList[tower].bulletPoint.y
+        x: state.towerList[tower].position.x + state.towerList[tower].bulletPoint.x,
+        y: state.towerList[tower].position.y + state.towerList[tower].bulletPoint.y
       };
       const targetPosition = Object.assign({}, state.towerList[tower].target.position);
 
       let bullet = Object.assign({}, state.towerList[tower].bullet);
 
-      //const angle = Math.atan(opposite / adjacent);
-      const angle = 0.75;
+      const deltaX = targetPosition.x - attackerPosition.x;
+      const deltaY = targetPosition.y - attackerPosition.y;
+      let angle = 0;
 
-      CreateElement(state.towerList[tower].bullet, attackerPosition, null, [targetPosition]);
+      if (deltaY >= 0) {
+        angle = (Math.PI / 2) - Math.atan2(deltaY, deltaX);
+      } else if (deltaY < 0) {
+        angle = (Math.PI / 2) + Math.atan2(Math.abs(deltaY), deltaX);
+      }
+
+      CreateElement(state.towerList[tower].bullet, attackerPosition, null, [targetPosition], angle);
       state.towerList[tower].attackSpeedCounter = 0;
 
     } else if (state.towerList[tower].attackSpeedCounter < 600) {

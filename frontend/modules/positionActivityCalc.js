@@ -37,7 +37,9 @@ const PositionActivityCalc = (unitData, selected, enemyList, towerList, unitsToD
       const deltaY = unit.goto.y - unit.position.y;
       const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-      unit.facing = deltaX >= 0 ? 'right' : 'left';
+      if (unit.class !== "bullet") {
+        unit.facing = deltaX >= 0 ? 'right' : 'left';
+      }
 
       let velocityX = 0;
       let velocityY = 0;

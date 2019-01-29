@@ -22,9 +22,9 @@ const Init = (data) => {
   }
 
   CreateElement('waveCaller', { x: 1075, y: 132 }, createWave);
-  CreateElement('archerTowerBasic', { x: 675, y: 310 });
+  //CreateElement('archerTowerBasic', { x: 675, y: 310 });
   CreateElement('archerTowerBasic', { x: 475, y: 310 });
-  CreateElement('archerTowerBasic', { x: 250, y: 80 });
+  //CreateElement('archerTowerBasic', { x: 250, y: 80 });
 
   const end =  new Date();
   console.log('Main init time: ', end-start)

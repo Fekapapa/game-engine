@@ -75,8 +75,8 @@ const UpdateElement = (toRender) => {
   const end = new Date();
 
   if (timerHelper % 50 === 0) {
-    console.log('Total update time: ', end-start)
-    console.log('Number of objects in COM: ', Object.keys(state.com).length)
+    //console.log('Total update time: ', end-start)
+    //console.log('Number of objects in COM: ', Object.keys(state.com).length)
   }
 }
 

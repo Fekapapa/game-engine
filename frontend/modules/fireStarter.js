@@ -10,7 +10,8 @@ const FireStarter = (state) => {
         x: state.towerList[tower].position.x + state.towerList[tower].bulletPoint.x,
         y: state.towerList[tower].position.y + state.towerList[tower].bulletPoint.y
       };
-      const targetPosition = Object.assign({}, state.towerList[tower].target.position);
+      //const targetPosition = Object.assign({}, state.towerList[tower].target.position);
+      const targetPosition = state.towerList[tower].target.position;
 
       let bullet = Object.assign({}, state.towerList[tower].bullet);
 

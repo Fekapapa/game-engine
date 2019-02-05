@@ -128,7 +128,7 @@
         "interactRightClick": false,
         "activity": "",
         "prevActivity": "",
-        "speed": 50,
+        "speed": 100,
         "health": 100,
         "armor": 100,
         "damageMin": 0,

@@ -49,41 +49,33 @@ const PositionActivityCalc = (unitData, selected, enemyList, towerList, unitsToD
           if (!unit.startPosition) {
             unit.startPosition = Object.assign({}, unit.position);
           }
-
-          if (!unit.trajectory) {
-            unit.trajectory = {angle: Math.PI};
+          if (!unit.originalDistance) {
+            unit.originalDistance = distance;
           }
 
-          const deltaXOriginal = unit.goto.x - unit.startPosition.x;
-          const deltaYOriginal = unit.goto.y - unit.startPosition.y;
-          const distanceOriginal = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
           velocityX = (deltaX / distance) * unit.speed / 10;
           velocityY = (deltaY / distance) * unit.speed / 10;
-          const time = distanceOriginal / Math.sqrt(velocityX * velocityX + velocityY * velocityY);
-
-          const deltaXBallistic = unit.goto.x - unit.startPosition.x;
-          const deltaYBallistic = unit.goto.y - unit.startPosition.y;
-          const distanceBallistic = Math.sqrt(deltaXBallistic * deltaXBallistic + deltaYBallistic * deltaYBallistic);
-
-          const trajectoryCenterX = unit.startPosition.x + (unit.goto.x - unit.startPosition.x) / 2;
-          const trajectoryCenterY = unit.startPosition.y + (unit.goto.y - unit.startPosition.y) / 2;
-
+          unit.distance -= Math.sqrt(velocityX * velocityX + velocityY * velocityY);
           unit.activity = 'run';
-          if(unit.startPosition.x < unit.goto.x) {
-            unit.position.x = trajectoryCenterX + Math.cos(unit.trajectory.angle) * distanceBallistic / 2;
-            unit.angle = -unit.trajectory.angle + Math.PI;
-          } else {
-            unit.position.x = trajectoryCenterX - Math.cos(unit.trajectory.angle) * distanceBallistic / 2;
-            unit.angle = unit.trajectory.angle + Math.PI;
+
+          if (deltaY >= 0) {
+            unit.angle = (Math.PI / 2) - Math.atan2(deltaY, deltaX);
+          } else if (deltaY < 0) {
+            unit.angle = (Math.PI / 2) + Math.atan2(Math.abs(deltaY), deltaX);
           }
-          unit.position.y = trajectoryCenterY + Math.sin(unit.trajectory.angle) * distanceBallistic / 2;
 
-          unit.trajectory.angle -= Math.PI / time / 2;
+          unit.position.x += velocityX - 1;
 
-          if (distance < unit.speed / 2) {
+          if (unit.originalDistance / distance > 2) {
+            unit.position.y += velocityY + (unit.originalDistance - distance) / 50;
+          } else {
+            unit.position.y += velocityY + 4;
+
+          }
+
+          if (distance < unit.speed / 10) {
             unitsToDeleteList.push(unit.unitId);
           }
-
         } else {
           velocityX = (deltaX / distance) * unit.speed / 10;
           velocityY = (deltaY / distance) * unit.speed / 10;

@@ -2,9 +2,9 @@
 
 import { GetState, SetState } from '../../../../main.js';
 
-const PositionActivityCalc = (unitData, selected, enemyList, towerList, unitsToDeleteList) => {
+const PositionActivityCalc = (unitData, selected, enemyList, towerList, unitsToDeleteList, unitsToDamageList) => {
   let state = GetState();
-  const unit = unitData;
+  let unit = unitData;
   const select = selected;
   unit.prevActivity = unit.activity;
 
@@ -74,6 +74,7 @@ const PositionActivityCalc = (unitData, selected, enemyList, towerList, unitsToD
           }
 
           if (distance < unit.speed / 10) {
+            unitsToDamageList.push(unit.damageData)
             unitsToDeleteList.push(unit.unitId);
           }
         } else {

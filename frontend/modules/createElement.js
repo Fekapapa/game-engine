@@ -2,7 +2,7 @@
 
 import { GetState, SetState } from '../../../../main.js';
 
-const CreateElement = (name, coordinates, eventListener = null, route = null, angle = null) => {
+const CreateElement = (name, coordinates, eventListener = null, route = null, angle = null, damageData = null) => {
   const state = GetState();
   const com = state.com;
   const unitData = Object.assign({}, state.units[name].unitData);
@@ -13,6 +13,10 @@ const CreateElement = (name, coordinates, eventListener = null, route = null, an
 
   if (angle) {
     unitData.angle = angle;
+  }
+
+  if (damageData) {
+    unitData.damageData = damageData;
   }
 
   if (route) {

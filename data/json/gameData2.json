@@ -28,6 +28,7 @@
         "prevActivity": "",
         "speed": 8,
         "health": 20,
+        "maxHealth": 20,
         "armor": 1,
         "damageMin": 1,
         "damageMax": 3,
@@ -145,6 +146,7 @@
         "facing": "right",
         "class": "bullet",
         "isAreaDamage": false,
+        "targetId": "",
         "die": false
       },
       "spriteData": {

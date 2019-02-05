@@ -16,6 +16,7 @@ const FireStarter = (state) => {
       //targetPosition.x = attackerPosition.x + 200;
 
       let bullet = Object.assign({}, state.towerList[tower].bullet);
+      bullet.target = state.towerList[tower].target.unitId;
 
       const deltaX = targetPosition.x - attackerPosition.x;
       const deltaY = targetPosition.y - attackerPosition.y;
@@ -27,7 +28,13 @@ const FireStarter = (state) => {
         angle = (Math.PI / 2) + Math.atan2(Math.abs(deltaY), deltaX);
       }
 
-      CreateElement(state.towerList[tower].bullet, attackerPosition, null, [targetPosition], angle);
+      const damageData = {
+        targetId: state.towerList[tower].target.unitId,
+        damageMin: state.towerList[tower].damageMin,
+        damageMax: state.towerList[tower].damageMax
+      };
+
+      CreateElement(state.towerList[tower].bullet, attackerPosition, null, [targetPosition], angle, damageData);
       state.towerList[tower].attackSpeedCounter = 0;
 
     } else if (state.towerList[tower].attackSpeedCounter < 600) {

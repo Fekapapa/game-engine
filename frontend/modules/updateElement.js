@@ -7,6 +7,7 @@ import { TargetFinder } from './targetFinder.js';
 import { FireStarter } from './fireStarter.js';
 import { DeleteElement } from './deleteElement.js';
 import { AreaDamage } from './areaDamage.js';
+import { DamageDealer } from './damageDealer.js';
 
 let timerHelper = 0;
 
@@ -19,10 +20,11 @@ const UpdateElement = (toRender) => {
   const enemyList = {};
   const towerList = {};
   const unitsToDeleteList = [];
+  const unitsToDamageList = [];
 
   for (let unitId in unitsToUpdate) {
 
-      const unitState = PositionActivityCalc(unitsToUpdate[unitId], state.selected, enemyList, towerList, unitsToDeleteList);
+      const unitState = PositionActivityCalc(unitsToUpdate[unitId], state.selected, enemyList, towerList, unitsToDeleteList, unitsToDamageList);
 
       state = AreaDamage(state);
 
@@ -64,6 +66,7 @@ const UpdateElement = (toRender) => {
   state.enemyList = enemyList;
   state.towerList = towerList;
 
+  state = DamageDealer(state, unitsToDamageList, unitsToDeleteList);
   state = DeleteElement(state, unitsToDeleteList);
   state = CollisionDetection(state);
   state = TargetFinder(state);

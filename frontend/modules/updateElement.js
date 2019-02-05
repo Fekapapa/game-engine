@@ -8,6 +8,7 @@ import { FireStarter } from './fireStarter.js';
 import { DeleteElement } from './deleteElement.js';
 import { AreaDamage } from './areaDamage.js';
 import { DamageDealer } from './damageDealer.js';
+import { HealthBar } from './healthBar.js';
 
 let timerHelper = 0;
 
@@ -40,7 +41,7 @@ const UpdateElement = (toRender) => {
 
       const activityFrame = unitState.activity + unitState.frameImg;
 
-      const nextFrame = {};
+      let nextFrame = {};
       nextFrame.dx = unitState.position.x;
       nextFrame.dy = unitState.position.y;
       nextFrame.type = elementName;
@@ -60,6 +61,8 @@ const UpdateElement = (toRender) => {
       unitState.frame++;
 
       state.com[unitId] = unitState;
+
+      nextFrame = HealthBar(nextFrame, state.com[unitId]);
 
       toRender.push(nextFrame);
   }

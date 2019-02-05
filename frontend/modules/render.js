@@ -52,6 +52,22 @@ const Render = (data) => {
   });
 
   while (length--) {
+    if(sortedData[length].healthBar) {
+      ctx.fillStyle = 'red';
+      ctx.fillRect(
+        sortedData[length].dx - sortedData[length].sWidth / 2,
+        700 - sortedData[length].dy - sortedData[length].sHeight / 2 - 10,
+        sortedData[length].sWidth,
+        2);
+
+      ctx.fillStyle = 'green';
+      ctx.fillRect(
+        sortedData[length].dx - sortedData[length].sWidth / 2,
+        700 - sortedData[length].dy - sortedData[length].sHeight / 2 - 10,
+        Math.round(sortedData[length].sWidth * sortedData[length].healthBar),
+        2);
+    }
+
     if(sortedData[length].facing === 'left') {
       if (preloadedImages[sortedData[length].type][sortedData[length].frame]) {
         ctx.save();

@@ -2,11 +2,11 @@
 
 import { GetState, SetState } from '../../../../main.js';
 import { PositionActivityCalc } from './positionActivityCalc.js';
-import { CollisionDetection } from './collisionDetection.js';
+import { CollisionDetection } from './index.js';
 import { TargetFinder } from './targetFinder.js';
 import { FireStarter } from './fireStarter.js';
 import { DeleteElement } from './deleteElement.js';
-import { AreaDamage } from './areaDamage.js';
+import { AreaDamage } from './index.js';
 import { DamageDealer } from './damageDealer.js';
 import { HealthBar } from './healthBar.js';
 
@@ -74,6 +74,7 @@ const UpdateElement = (toRender) => {
   state = CollisionDetection(state);
   state = TargetFinder(state);
   state = FireStarter(state);
+  state = AreaDamage(state);
 
 
   SetState(state);

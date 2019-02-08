@@ -1,6 +1,6 @@
 'use strict'
 
-import { CreateElement } from './createElement.js';
+import { CreateElement } from './index.js';
 
 const FireStarter = (state) => {
   for (let tower in state.towerList) {
@@ -34,7 +34,15 @@ const FireStarter = (state) => {
         damageMax: state.towerList[tower].damageMax
       };
 
-      CreateElement(state.towerList[tower].bullet, attackerPosition, null, [targetPosition], angle, damageData);
+      const createBulletData = {
+        name: state.towerList[tower].bullet,
+        coordinates: attackerPosition,
+        route: [targetPosition],
+        angle: angle,
+        damageData: damageData
+      }
+      CreateElement(createBulletData);
+
       state.towerList[tower].attackSpeedCounter = 0;
 
     } else if (state.towerList[tower].attackSpeedCounter < 600) {

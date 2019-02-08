@@ -1,8 +1,17 @@
 'use strict'
 
 import { GetState, SetState } from '../../../../main.js';
+import { CreateWave } from './partials/createWave.js';
 
-const CreateElement = (name, coordinates, eventListener = null, route = null, angle = null, damageData = null) => {
+const CreateElement = ( creationData ) => {
+
+  const name = creationData.name;
+  const coordinates = creationData.coordinates;
+  const eventListener = creationData.eventListener;
+  const route = creationData.route;
+  const angle = creationData.angle;
+  const damageData = creationData.damageData;
+
   const state = GetState();
   const com = state.com;
   const unitData = Object.assign({}, state.units[name].unitData);
@@ -71,25 +80,6 @@ const CreateElement = (name, coordinates, eventListener = null, route = null, an
   state.com[unitId] = Object.assign({}, com[unitId]);
 
   SetState(state);
-}
-
-const CreateWave = (wave) => {
-  let delay = 0;
-
-  wave.units.forEach((element) => {
-    const delayedCreation = () => {
-      if (element.eventListener) {
-        CreateElement(element.name, element.coordinates, element.eventListener)
-      } else if (element.route) {
-        CreateElement(element.name, element.coordinates, null, wave[element.route])
-      } else {
-        CreateElement(element.name, element.coordinates)
-      }
-    }
-
-    window.setTimeout(delayedCreation, delay);
-    delay += 200;
-  })
 }
 
 export { CreateElement, CreateWave };

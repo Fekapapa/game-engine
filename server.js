@@ -20,7 +20,8 @@ http.createServer(function(req, res){
 		res.writeHead(200, {'Content-Type': 'text/css'});
 		fileStream.pipe(res);
 	} else if (req.url.match('\.js$')) {
-		const fileStream = fs.createReadStream(filePath, 'UTF-8');
+		const filePathCore = path.join(__dirname, './core/', req.url );
+		const fileStream = fs.createReadStream(filePathCore, 'UTF-8');
 		res.writeHead(200, {'Content-Type': 'text/javascript'});
 		fileStream.pipe(res);
 	} else if (req.url.match('\.png$')) {

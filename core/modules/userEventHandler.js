@@ -60,7 +60,7 @@ const MouseEventCatch = (e) => {
   }
 
   if (clickButton === 2 && state.selected.name !== 'unSelected' && state.selected.class === 'enemyUnit') {
-    state.selected.goto = Object.assign({}, {x: clickX, y: clickY });
+    state.selected.goto = { ...{ x: clickX, y: clickY } };
   }
 
   SetState(state);

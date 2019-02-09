@@ -6,7 +6,7 @@ const GenerateBulletData = (tower) => {
     x: tower.position.x + tower.bulletPoint.x,
     y: tower.position.y + tower.bulletPoint.y
   };
-  //const targetPosition = Object.assign({}, attackerPosition);
+  //const targetPosition = { ...attackerPosition };
   const targetPosition = tower.target.position;
   const angle = CalculateAngle(targetPosition, attackerPosition);
 

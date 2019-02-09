@@ -1,7 +1,7 @@
 'use strict'
 
 import { GetState, SetState } from '../../../../main.js';
-import { PositionActivityCalc } from './positionActivityCalc.js';
+import { UpdateUnitState } from './index.js';
 import { CollisionDetection } from './index.js';
 import { TargetFinder } from './index.js';
 import { FireStarter } from './index.js';
@@ -25,7 +25,16 @@ const UpdateElement = (toRender) => {
 
   for (let unitId in unitsToUpdate) {
 
-      const unitState = PositionActivityCalc(unitsToUpdate[unitId], state.selected, enemyList, towerList, unitsToDeleteList, unitsToDamageList);
+    const updateUnitStateData = {
+      'unitData': unitsToUpdate[unitId],
+      'selected': state.selected,
+      'enemyList': enemyList,
+      'towerList': towerList,
+      'unitsToDeleteList': unitsToDeleteList,
+      'unitsToDamageList': unitsToDamageList
+    }
+
+      const unitState = UpdateUnitState(updateUnitStateData);
 
       state = AreaDamage(state);
 

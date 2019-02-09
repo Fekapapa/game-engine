@@ -14,7 +14,7 @@ const CreateElement = ( creationData ) => {
   com[unitId] = unitData;
   com[unitId].unitId = unitId;
 
-  state.com[unitId] = Object.assign({}, com[unitId]);
+  state.com[unitId] = { ...com[unitId] };
 
   SetState(state);
 }

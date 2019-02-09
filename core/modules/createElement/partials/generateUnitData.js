@@ -4,7 +4,7 @@ import { DistanceCalculator } from './distanceCalculator.js';
 
 const GenerateUnitData = (state, creationData) => {
   const name = creationData.name;
-  const unitData = Object.assign({}, state.units[name].unitData);
+  const unitData = { ...state.units[name].unitData };
 
   for (let property in creationData) {
     if (property !== "name") {

@@ -1,11 +1,11 @@
 'use strict'
 
-import { Render, RenderInit } from './core/modules/render.js';
-import { UserEventHandler } from './core/modules/userEventHandler.js';
-import { CreateElement, CreateWave } from './core/modules/index.js';
-import { UpdateElement } from './core/modules/updateElement.js';
-import { MapData } from './core/data/mapData/map_01_data.js';
-import { GameData } from './core/data/gameData/gameData2.js';
+import { Render, RenderInit } from './modules/render.js';
+import { UserEventHandler } from './modules/userEventHandler.js';
+import { CreateElement, CreateWave } from './modules/index.js';
+import { UpdateElement } from './modules/updateElement.js';
+import { MapData } from './data/mapData/map_01_data.js';
+import { GameData } from './data/gameData/gameData2.js';
 
 //import { MapData } from './frontend/mapData/map_01_data_performanceTest.js';
 
@@ -59,10 +59,12 @@ const Init = () => {
 }
 
 const SetState = (newState) => {
-  state = Object.assign({}, newState);
+  state = { ...newState };
 }
 
-const GetState = () => Object.assign({}, state);
+const GetState = () => {
+  return { ...state }
+};
 
 const Main = () => {
   const toRender = [];

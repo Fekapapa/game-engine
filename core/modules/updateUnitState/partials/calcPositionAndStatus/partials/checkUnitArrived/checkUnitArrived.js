@@ -1,6 +1,6 @@
 'use strict'
 
-import { StopUnit } from './StopUnit.js';
+import { StopUnit } from './partials/StopUnit.js';
 
 const CheckUnitArrived = (distance, unit, unitsToDeleteList) => {
   const isUnitStopped = distance < unit.speed / 10;

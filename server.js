@@ -5,7 +5,7 @@ const http = require('http');
 const path = require('path');
 const port = 3000;
 
-const gameData = JSON.parse(fs.readFileSync('./data/json/gameData2.json'));
+//const gameData = JSON.parse(fs.readFileSync('./data/json/gameData2.json'));
 
 http.createServer(function(req, res){
 	const filePath = path.join(__dirname, './', req.url );
@@ -29,12 +29,12 @@ http.createServer(function(req, res){
 		fileStream.pipe(res);
 	}
 
-	if (req.url === '/data') {
+	/*if (req.url === '/data') {
 		(function(err, json) {
 			res.writeHead(200, {'Conten-Type': 'text/json'});
 			res.end(JSON.stringify(gameData));
 		})();
-	}
+	}*/
 
 	console.log(req.url);
 }).listen(port)

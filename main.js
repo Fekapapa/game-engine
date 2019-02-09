@@ -1,18 +1,20 @@
 'use strict'
 
-import { Render, RenderInit } from './frontend/modules/render.js';
-import { GetData } from './frontend/modules/getData.js';
-import { UserEventHandler } from './frontend/modules/userEventHandler.js';
-import { CreateElement, CreateWave } from './frontend/modules/index.js';
-import { UpdateElement } from './frontend/modules/updateElement.js';
-import { MapData } from './frontend/mapData/map_01_data.js';
+import { Render, RenderInit } from './core/modules/render.js';
+import { UserEventHandler } from './core/modules/userEventHandler.js';
+import { CreateElement, CreateWave } from './core/modules/index.js';
+import { UpdateElement } from './core/modules/updateElement.js';
+import { MapData } from './core/data/mapData/map_01_data.js';
+import { GameData } from './core/data/gameData/gameData2.js';
+
 //import { MapData } from './frontend/mapData/map_01_data_performanceTest.js';
 
 let state = {};
 
-const Init = (data) => {
+const Init = () => {
   const start = new Date();
-  state = data;
+  state = GameData();
+  console.log(state)
   UserEventHandler();
   RenderInit();
 
@@ -22,32 +24,32 @@ const Init = (data) => {
 
   const creationBackgroundData = {
     name: 'background',
-    coordinates: { x: 550, y: 350 }
+    position: { x: 550, y: 350 }
   }
   CreateElement(creationBackgroundData);
 
   const creationWaveCallerData = {
     name: 'waveCaller',
-    coordinates: { x: 1075, y: 132 },
+    position: { x: 1075, y: 132 },
     eventListener: createWave
   }
   CreateElement(creationWaveCallerData);
 
   const creationTower1Data = {
     name: 'archerTowerBasic',
-    coordinates: { x: 675, y: 310 }
+    position: { x: 675, y: 310 }
   }
   CreateElement(creationTower1Data);
 
   const creationTower2Data = {
     name: 'archerTowerBasic',
-    coordinates: { x: 475, y: 310 }
+    position: { x: 475, y: 310 }
   }
   CreateElement(creationTower2Data);
 
   const creationTower3Data = {
     name: 'archerTowerBasic',
-    coordinates: { x: 250, y: 80 }
+    position: { x: 250, y: 80 }
   }
   CreateElement(creationTower3Data);
 
@@ -70,6 +72,6 @@ const Main = () => {
   window.requestAnimationFrame(Main);
 }
 
-GetData();
+Init();
 
-export { Init, Main, SetState, GetState };
+export { SetState, GetState };

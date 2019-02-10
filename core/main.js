@@ -1,13 +1,13 @@
 'use strict'
 
 import { Render, RenderInit } from './modules/render.js';
-import { UserEventHandler } from './modules/userEventHandler.js';
+import { UserEventHandler } from './modules/index.js';
 import { CreateElement, CreateWave } from './modules/index.js';
-import { UpdateElement } from './modules/updateElement.js';
-import { MapData } from './data/mapData/map_01_data.js';
+import { UpdateCOM } from './modules/index.js';
+//import { MapData } from './data/mapData/map_01_data.js';
 import { GameData } from './data/gameData/gameData2.js';
 
-//import { MapData } from './frontend/mapData/map_01_data_performanceTest.js';
+import { MapData } from './data/mapData/map_01_data_performanceTest.js';
 
 let state = {};
 
@@ -68,7 +68,7 @@ const GetState = () => {
 
 const Main = () => {
   const toRender = [];
-  UpdateElement(toRender);
+  UpdateCOM(toRender);
   Render(toRender);
 
   window.requestAnimationFrame(Main);

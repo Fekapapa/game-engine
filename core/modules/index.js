@@ -5,9 +5,10 @@ import { CreateElement, CreateWave } from './createElement/createElement.js';
 import { DamageDealer } from './damageDealer/damageDealer.js';
 import { DeleteElement } from './deleteElement/deleteElement.js';
 import { FireStarter } from './fireStarter/fireStarter.js';
-import { HealthBar } from './healthBar/healthBar.js';
 import { TargetFinder } from './targetFinder/targetFinder.js';
 import { UpdateUnitState } from './updateUnitState/updateUnitState.js';
+import { UpdateCOM } from './updateCOM/updateCOM.js';
+import { UserEventHandler } from './userEventHandler/userEventHandler.js';
 
 export {
   AreaDamage,
@@ -17,8 +18,9 @@ export {
   DamageDealer,
   DeleteElement,
   FireStarter,
-  HealthBar,
   TargetFinder,
   UpdateUnitState,
-  CalcDistance
+  CalcDistance,
+  UpdateCOM,
+  UserEventHandler
 }

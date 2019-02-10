@@ -106,7 +106,7 @@ const Render = (data) => {
     }
     //********************************************//
     // this only helps to test collision detection
-    if (sortedData[length].type === "archerTowerBasic") {
+    /*if (sortedData[length].type === "archerTowerBasic") {
       ctx.strokeStyle = "rgb(250, 30, 30)"
       ctx.beginPath();
       ctx.arc(sortedData[length].dx, 700 - sortedData[length].dy, 200, 0, Math.PI * 2, true); // Outer circle
@@ -116,14 +116,14 @@ const Render = (data) => {
       ctx.beginPath();
       ctx.arc(sortedData[length].dx, 700 - sortedData[length].dy, 1, 0, Math.PI * 2, true); // Inner circle
       ctx.arc(sortedData[length].dx, 700 - sortedData[length].dy, 2, 0, Math.PI * 2, true); // Inner circle
-      ctx.stroke();
+      ctx.stroke();*/
     //********************************************//
   }
 
   const end = new Date();
 
   if (timerHelper % 50 === 0) {
-    //console.log('Total render time: ', end-start)
+    console.log('Total render time: ', end-start)
   }
 }
 

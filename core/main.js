@@ -1,13 +1,17 @@
 'use strict'
 
-import { Render, RenderInit } from './modules/render.js';
-import { UserEventHandler } from './modules/index.js';
-import { CreateElement, CreateWave } from './modules/index.js';
-import { UpdateCOM } from './modules/index.js';
-//import { MapData } from './data/mapData/map_01_data.js';
+import { MapData } from './data/mapData/map_01_data.js';
+//import { MapData } from './data/mapData/map_01_data_performanceTest.js';
 import { GameData } from './data/gameData/gameData2.js';
+import {
+  UserEventHandler,
+  RenderInitialize,
+  CreateElement,
+  CreateWave,
+  UpdateCOM,
+  Render
+} from './modules/index.js';
 
-import { MapData } from './data/mapData/map_01_data_performanceTest.js';
 
 let state = {};
 
@@ -16,7 +20,7 @@ const Init = () => {
   state = GameData();
   console.log(state)
   UserEventHandler();
-  RenderInit();
+  RenderInitialize();
 
   const createWave = () => {
     CreateWave(MapData()[0][0].wave01);

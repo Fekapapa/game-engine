@@ -9,6 +9,8 @@ import { TargetFinder } from './targetFinder/targetFinder.js';
 import { UpdateUnitState } from './updateUnitState/updateUnitState.js';
 import { UpdateCOM } from './updateCOM/updateCOM.js';
 import { UserEventHandler } from './userEventHandler/userEventHandler.js';
+import { RenderInitialize } from './renderInitialize/renderInitialize.js';
+import { Render } from './render/render.js';
 
 export {
   AreaDamage,
@@ -22,5 +24,7 @@ export {
   UpdateUnitState,
   CalcDistance,
   UpdateCOM,
-  UserEventHandler
+  UserEventHandler,
+  RenderInitialize,
+  Render
 }

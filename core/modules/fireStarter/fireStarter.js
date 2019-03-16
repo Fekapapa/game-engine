@@ -10,9 +10,16 @@ const FireStarter = (state) => {
     const hasTarget = Object.entries(tower.target).length !== 0;
 
     if (readyToFire && hasTarget) {
-      tower.activity = "attack";
+      tower.nextActivity = "attack";
+
+      /*if (tower.name === "archerTowerBasic") {
+        console.log(tower.activity)
+        console.log(tower.frameImg)
+        console.log(tower.frameNumberAtAttack)
+      }*/
 
       if (tower.activity === "attack" && tower.frameImg === tower.frameNumberAtAttack) {
+        console.log(tower.name)
         const bulletData = GenerateBulletData(tower);
         CreateElement(bulletData);
         tower.attackSpeedCounter = 0;

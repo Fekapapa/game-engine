@@ -40,7 +40,7 @@ const Init = () => {
   CreateElement(creationWaveCallerData);
 
   const creationTower1Data = {
-    name: 'lightningTowerBasic',
+    name: 'rockTowerBasic',
     position: { x: 675, y: 310 }
   }
   CreateElement(creationTower1Data);

@@ -8,13 +8,14 @@ const GenerateBulletData = (tower) => {
   };
   //const targetPosition = { ...attackerPosition };
   const targetPosition = tower.target.position;
+
   const angle = CalculateAngle(targetPosition, attackerPosition);
 
   const bulletData = {
     name: tower.bullet,
     position: attackerPosition,
     route: [targetPosition],
-    angle: angle,
+    angle: tower.bullet === "rockBullet" ? Math.PI : angle,
     damageData: {
       targetId: tower.target.unitId,
       damageMin: tower.damageMin,

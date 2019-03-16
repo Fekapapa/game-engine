@@ -19,7 +19,7 @@ const UpdateUnitState = (updateUnitStateData) => {
   ClassDependentPreparations(unit, enemyList, towerList);
   CheckSelected(select, unit);
 
-  if (!unit.goto.x) {
+  if (!unit.goto.x && unit.class !== "tower") {
     unit.activity = 'idle';
   } else {
     CalcPositionAndStatus(unit, unitsToDamageList, unitsToDeleteList);

@@ -1,6 +1,6 @@
 'use strict'
 
-const CalculateUnitPosition = (movingData, unit) => {
+const CalculateArcherBulletPosition = (movingData, unit) => {
   unit.position.x += movingData.velocityX - 1;
 
   if (unit.originalDistance / movingData.distance > 2) {
@@ -10,4 +10,4 @@ const CalculateUnitPosition = (movingData, unit) => {
   }
 }
 
-export { CalculateUnitPosition };
+export { CalculateArcherBulletPosition };

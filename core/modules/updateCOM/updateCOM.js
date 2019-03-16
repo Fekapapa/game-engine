@@ -37,6 +37,7 @@ const UpdateCOM = (toRender) => {
     }
     const unitState = UpdateUnitState(updateUnitStateData);
     const frameName = GenerateFrameName(unitState);
+
     const frameData = GenerateFrameData(unitState, elementName, frameName, state.com[unitId]);
 
     state.com[unitId] = unitState;
@@ -59,8 +60,8 @@ const UpdateCOM = (toRender) => {
   const end = new Date();
 
   if (timerHelper % 50 === 0) {
-    console.log('Total update time: ', end-start)
-    console.log('Number of objects in COM: ', Object.keys(state.com).length)
+    //console.warn('Total update time: ', end-start)
+    //console.log('Number of objects in COM: ', Object.keys(state.com).length)
   }
 }
 

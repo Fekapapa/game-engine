@@ -4,6 +4,7 @@ import { CalcDistance } from '../../../index.js';
 
 import { CheckDirection } from './partials/checkDirection.js';
 import { UpdateBulletClass } from './partials/updateBulletClass/updateBulletClass.js';
+import { UpdateTowerClass } from './partials/updateTowerClass.js';
 import { UpdateNonBulletClass } from './partials/updateNonBulletClass.js';
 import { CheckUnitArrived } from './partials/checkUnitArrived/checkUnitArrived.js';
 
@@ -19,6 +20,8 @@ const CalcPositionAndStatus = (unit, unitsToDamageList, unitsToDeleteList) => {
 
   if (unit.class === "bullet") {
     UpdateBulletClass(movingData, unit, unitsToDamageList, unitsToDeleteList);
+  } else if (unit.class === "tower") {
+    UpdateTowerClass(unit);
   } else {
     UpdateNonBulletClass(movingData, unit);
   }

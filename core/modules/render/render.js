@@ -59,7 +59,7 @@ const Render = (data) => {
   const end = new Date();
 
   if (timerHelper % 50 === 0) {
-    console.log('Total render time: ', end-start)
+    //console.warn('Total render time: ', end-start)
   }
 }
 

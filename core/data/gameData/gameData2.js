@@ -324,7 +324,7 @@ const GameData = () => {
             "interactRightClick": false,
             "activity": "",
             "prevActivity": "",
-            "speed": 40,
+            "speed": 10,
             "health": 100,
             "armor": 100,
             "damageMin": 0,
@@ -342,7 +342,12 @@ const GameData = () => {
             "class": "bullet",
             "isAreaDamage": true,
             "targetId": "",
-            "ballisticHelper": 0,
+            "ballisticData": {
+              "verticalVelocity": 0,
+              "horizontalVelocity": 0,
+              "gravity": 10,
+              "flightTime": 0
+            },
           },
           "spriteData": {
             "idle0": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAWCAMAAADto6y6AAABTVBMVEUAAABEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlEKBlvRClEKBleOCP0tXR2SSxnPiaCUTKaYDyMWDaKVjV0RytsQijvsHCXXjvsrW/jpmq3f1GpdUmnakOdYz6TXDmHVDR/TzB8TC95Si1YNSBLLBxJKxvQkV3DiVesbUWFUjNxRSlqQCdlPSVhOiRbNiJRMR5OLh3xsnLgomfdoGbTmWLUlV+9f1C5eU2ja0OkZ0GCWzlWNCBUMR/YnmTbnWTIiljChVS0g1OxdUmlc0mvcUegbUWsbESTaEKdZ0ChZT+XYT2HXjuRWTjnqGvKlF6tfVCweEyrbkWcbEORZkGYZ0B+WTiDVjVaOyVd8jMXAAAAIXRSTlMACPPe2J3q5czDrJeGTiMQDPu7YF4d+Pamjn56amlDPBWl5XsZAAABqklEQVQoz12S1XLrMBRFHW6gbUqXSbIFxsQMcZgapjLDZfr/xyrTdjLT/ag1OkuafbhlNhLbmdynTe5lIvH571kHwmQ6k8nt7K3AOjxTBaE4ubgKWvMujO0+g/wro3J0vM/Y7fFURDxMRx7Bl5Q+LBcY6FdH9o3HSOJRnZyp6qh4ez3WTP2nViO4Hb5Z3kl0D4R+RbXpadUaXNdEqrQWcJ3jcv+LhQPDnFiX55Z5o5kSaCK+tMbtwm9fR0ZFQwNkEtkmFAFA+AXk0n/3x+Uf54jU61QiU8lTAMB89zWXPCkOBX3sn1KXkHsb+B5W8BxmudhdryDoVXfiu7JX90GjhTFTbHDbV31VOCqLxq974AE2p4H5Toy9Nv690FPLvT/GGZBtJl4a4Fv2i2hFONSGOmUniFYdizjNNvzIwNaJcOgiSQTAmV6KkoPYJPiZgdRMKPzTLCoDiVJZAqDZDtfyDHyAd4MLUa7VAHIRYYYgzD61kYKBDEDdAT7BSoMvRfPPBe7EOq2mIjYwUDAfbL1fVbgZhwt+mXbQhYkIt8reu2hYKoUQRuPZp514AEQpUMBQ3WoHAAAAAElFTkSuQmCC",

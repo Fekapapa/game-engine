@@ -22,7 +22,7 @@ const UpdateBulletClass = (movingData, unit, unitsToDamageList, unitsToDeleteLis
   } else if (unit.name === "lightningBullet") {
     CalculateLightningBulletPosition(movingData, unit);
   } else if (unit.name === "rockBullet") {
-    CalculateRockBulletPosition(movingData, unit);
+    CalculateRockBulletPosition(movingData, unit, unitsToDeleteList);
   }
 
 

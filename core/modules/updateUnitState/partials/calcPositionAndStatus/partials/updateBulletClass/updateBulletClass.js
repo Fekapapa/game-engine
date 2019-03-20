@@ -17,18 +17,25 @@ const UpdateBulletClass = (movingData, unit, unitsToDamageList, unitsToDeleteLis
     CalculateUnitAngle(movingData, unit);
   }
 
+  if (unit.name !== "rockBullet" && movingData.distance < unit.speed / 10) {
+    unitsToDamageList.push(unit.damageData)
+    unitsToDeleteList.push(unit.unitId);
+  }
+
+  if (unit.name === "rockBullet" && Math.abs(movingData.deltaX) < 10 && unit.ballisticData.velocityY < 0) {
+    unit.ballisticData.flightTime = 0;
+    unit.ballisticData = {};
+    console.log(unit.ballisticData.flightTime)
+    unitsToDamageList.push(unit.damageData)
+    unitsToDeleteList.push(unit.unitId);
+  }
+
   if (unit.name === "archerBullet") {
     CalculateArcherBulletPosition(movingData, unit);
   } else if (unit.name === "lightningBullet") {
     CalculateLightningBulletPosition(movingData, unit);
   } else if (unit.name === "rockBullet") {
-    CalculateRockBulletPosition(movingData, unit, unitsToDeleteList);
-  }
-
-
-  if (movingData.distance < unit.speed / 10) {
-    unitsToDamageList.push(unit.damageData)
-    unitsToDeleteList.push(unit.unitId);
+    CalculateRockBulletPosition(unit);
   }
 }
 
